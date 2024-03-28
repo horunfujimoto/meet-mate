@@ -66,17 +66,41 @@ class MatchUsersController extends Controller
 
     public function edit($id)
     {
-        //
+        // idを検索して取得
+        $match_user = MatchUser::findOrFail($id);
+        
+        return view('match_users.edit', [
+            'match_user' => $match_user,
+        ]);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        // idを検索して取得
+        $match_user = MatchUser::findOrFail($id);
+        // 更新
+        $match_user->name = $request->name;
+        $match_user->address = $request->address;
+        $match_user->work = $request->work;
+        $match_user->birthday = $request->birthday;
+        $match_user->sns = $request->sns;
+        $match_user->way = $request->way;
+        $match_user->others = $request->others;
+        $match_user->image = $request->image;
+        
+        $match_user->save();
+        // 詳細ビューでそれを表示
+        return redirect()->route('match_users.show', $match_user->id);
     }
 
     public function destroy($id)
     {
-        //
+        // idを検索して取得
+        $match_user = MatchUser::findOrFail($id);
+        // 削除
+        $match_user->delete();
+        // 一覧ページ
+        return redirect()->route('match_users.index');
     }
 
 }
