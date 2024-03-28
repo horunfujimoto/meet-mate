@@ -43,10 +43,18 @@ class User extends Authenticatable
     ];
     
     /**
-     * このユーザが所有する投稿。（ MatchUserモデルとの関係を定義）
+     * このユーザが登録した出会った方。（ MatchUserモデルとの関係を定義）
      */
     public function match_users()
     {
         return $this->hasMany(MatchUser::class);
+    }
+    
+    /**
+     * このユーザが所有する投稿。（ Postモデルとの関係を定義）
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }

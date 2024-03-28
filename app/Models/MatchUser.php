@@ -17,6 +17,14 @@ class MatchUser extends Model
         return $this->belongsTo(User::class);
     }
     
+    /**
+     * 出会った方と紐づく投稿。（ Postモデルとの関係を定義）
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    
     // protected $fillable = [
     //     'name', 
     //     'address',
