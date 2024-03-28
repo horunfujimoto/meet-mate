@@ -17,14 +17,14 @@ class MatchUser extends Model
         return $this->belongsTo(User::class);
     }
     
-    protected $fillable = [
-        'name', // 'name'列を追加
-        'address',
-        'work',
-        'birthday',
-        'sns',
-        'way',
-        'others',
-        'image',
-    ];
+    // protected $fillable = [
+    //     'name', 
+    //     'address',
+    //     'work',
+    //     'birthday',
+    //     'sns',
+    //     'way',
+    //     'others',
+    //     'image',
+    // ];
 }
