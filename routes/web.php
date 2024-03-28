@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UsersController; // UsersControllerを追加
 use App\Http\Controllers\MatchUsersController;// MatchUsersControllerを追加
+use App\Http\Controllers\PostsController;// PostsControllerを追加
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,4 +29,5 @@ require __DIR__.'/auth.php';
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UsersController::class, ['only' => ['index']]);
     Route::resource('match_users', MatchUsersController::class);
+    Route::resource('posts', PostsController::class);
 });
