@@ -21,14 +21,16 @@
     
     {{-- 一覧ページへのリンク --}}
     <a class="btn btn-outline" href="{{ route('match_users.index') }}">出会った方一覧</a>
-    {{-- 編集ページへのリンク --}}
-    <a class="btn btn-outline" href="{{ route('match_users.edit', $match_user->id) }}">編集</a>
-    {{-- 削除フォーム --}}
-    <form method="POST" action="{{ route('match_users.destroy', $match_user->id) }}" class="my-2">
-        @csrf
-        @method('DELETE')
-        
-        <button type="submit" class="btn btn-error btn-outline" 
-            onclick="return confirm('削除してもよろしいですか？')">削除</button>
-    </form>
+    @if (Auth::id() == $match_user->user_id)
+        {{-- 編集ページへのリンク --}}
+        <a class="btn btn-outline" href="{{ route('match_users.edit', $match_user->id) }}">編集</a>
+        {{-- 削除フォーム --}}
+        <form method="POST" action="{{ route('match_users.destroy', $match_user->id) }}" class="my-2">
+            @csrf
+            @method('DELETE')
+            
+            <button type="submit" class="btn btn-error btn-outline" 
+                onclick="return confirm('削除してもよろしいですか？')">削除</button>
+        </form>
+    @endif
 @endsection
