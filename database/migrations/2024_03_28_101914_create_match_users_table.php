@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('sns');
             $table->string('way', 20);
             $table->string('others');
+            $table->string('image');
             $table->timestamps();
         });
     }
