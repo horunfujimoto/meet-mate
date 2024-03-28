@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\UsersController; // UsersControllerを追加
-use App\Http\Controllers\MatchUsersController;
+use App\Http\Controllers\MatchUsersController;// MatchUsersControllerを追加
 use Illuminate\Support\Facades\Route;
 
 /*

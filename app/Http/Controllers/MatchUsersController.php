@@ -10,12 +10,16 @@ class MatchUsersController extends Controller
     
     public function index()
     {
-        //
+        // // 出会った方一覧をidの降順で取得
+        // $match_users = MatchUser::orderBy('id', 'desc')->paginate(10);
+
+        // ユーザ一覧ビューでそれを表示
+        return view('match_users.index');
     }
 
     public function create()
     {
-        //
+        return view('match_users.create');
     }
 
     public function store(Request $request)
