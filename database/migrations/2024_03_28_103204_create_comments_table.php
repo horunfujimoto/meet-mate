@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('post_id');
-            $table->string('comments', 50);
+            $table->string('comment', 50);
             $table->timestamps();
             
             // 外部キー制約
