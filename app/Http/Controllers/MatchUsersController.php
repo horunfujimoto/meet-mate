@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MatchUser; // MatchUserモデルをインポート
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class MatchUsersController extends Controller
@@ -23,7 +24,7 @@ class MatchUsersController extends Controller
     {
         $match_user = new MatchUser;
 
-        // メッセージ作成ビューを表示
+        // 作成ビューを表示
         return view('match_users.create', [
             'match_user' => $match_user,
         ]);
@@ -31,12 +32,36 @@ class MatchUsersController extends Controller
 
     public function store(Request $request)
     {
-        //
+        // 認証済みユーザーのIDを取得
+        $user_id = Auth::id();
+        
+        $match_user = new MatchUser;
+
+        $match_user->name = $request->name;
+        $match_user->address = $request->address;
+        $match_user->work = $request->work;
+        $match_user->birthday = $request->birthday;
+        $match_user->sns = $request->sns;
+        $match_user->way = $request->way;
+        $match_user->others = $request->others;
+        $match_user->image = $request->image;
+        $match_user->user_id = $user_id;
+        
+        $match_user->save();
+        
+        // 詳細ページ
+        return redirect()->route('match_users.show', $match_user->id);
     }
 
     public function show($id)
     {
-        //
+        // idの値で検索して取得
+        $match_user = MatchUser::findOrFail($id);
+
+        // 詳細ビューでそれを表示
+        return view('match_users.show', [
+            'match_user' => $match_user,
+        ]);
     }
 
     public function edit($id)
@@ -53,5 +78,5 @@ class MatchUsersController extends Controller
     {
         //
     }
-    
+
 }
