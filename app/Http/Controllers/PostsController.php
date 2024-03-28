@@ -87,16 +87,57 @@ class PostsController extends Controller
 
     public function edit($id)
     {
-        //
+        // 投稿を取得
+        $post = Post::findOrFail($id);
+        
+        // 投稿者の情報を取得
+        $user = $post->user;
+        
+        // 投稿に関連付けられた MatchUser の ID を取得
+        $match_user_id = $post->match_user_id;
+    
+        // MatchUser モデルから会った相手のリストを取得
+        $match_users = MatchUser::where('user_id', auth()->id())->get();
+        
+        // MatchUser の ID を使って名前を取得
+        $match_user = MatchUser::findOrFail($match_user_id);
+        
+        // ビューにデータを渡す
+        return view('posts.edit', [
+            'post' => $post,
+            'user' => $user,
+            'match_user' => $match_user,
+            'match_users' => $match_users, // $match_users を追加
+        ]);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        // 更新対象の投稿を取得
+        $post = Post::findOrFail($id);
+    
+        // フォームから送信されたデータで投稿を更新
+        $post->title = $request->title;
+        $post->date_day = $request->date_day;
+        $post->place = $request->place;
+        $post->body = $request->body;
+        $post->image = $request->image;
+        $post->match_user_id = $request->match_user_id;
+        
+        // 更新を保存
+        $post->save();
+        
+        // 保存後、投稿の詳細ページにリダイレクト
+        return redirect()->route('posts.show', $post->id);
     }
 
     public function destroy($id)
     {
-        //
+        // idを検索して取得
+        $post = Post::findOrFail($id);
+        // 削除
+        $post->delete();
+        // 一覧ページ
+        return redirect()->route('posts.index');
     }
 }

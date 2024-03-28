@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="prose ml-4 mt-8">
-        <h2>投稿の詳細ページ</h2>
+        <h2>{{ $post->title }}の詳細ページ</h2>
     </div>
 
     <div class="flex justify-center">
