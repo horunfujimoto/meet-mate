@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MatchUser; // MatchUserモデルをインポート
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth; // Authをインポート
 use Illuminate\Http\Request;
 
 class MatchUsersController extends Controller
