@@ -80,9 +80,9 @@ class MatchUsersController extends Controller
         $match_user = MatchUser::findOrFail($id);
         
         if (\Auth::id() === $match_user->user_id) {
-        return view('match_users.edit', [
-            'match_user' => $match_user,
-        ]);
+            return view('match_users.edit', [
+                'match_user' => $match_user,
+            ]);
         }
          // 前のURLへリダイレクトさせる
         return back()
@@ -102,7 +102,17 @@ class MatchUsersController extends Controller
             $match_user->sns = $request->sns;
             $match_user->way = $request->way;
             $match_user->others = $request->others;
-            $match_user->image = $request->image;
+            
+            // 画像の保存
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $filename); // public/images ディレクトリに保存
+                $match_user->image = $filename;
+            } else {
+                // 再選択なしでの更新の場合は、元の画像を保持する
+                $match_user->image = $match_user->image;
+            }
             
             $match_user->save();
             // 詳細ビューでそれを表示

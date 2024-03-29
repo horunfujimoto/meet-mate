@@ -45,7 +45,8 @@
                 <label for="image" class="label">
                     <span class="label-text">画像:</span>
                 </label>
-                <input type="file" name="image" class="input input-bordered w-full" required>
+                <img src="/images/{{ $post->image }}" alt="{{ $post->name }}" width="100">
+                <input type="file" name="image" class="input input-bordered w-full mt-3">
                 
             </div>
 

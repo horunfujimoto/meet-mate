@@ -50,8 +50,8 @@
                 <label for="image" class="label">
                     <span class="label-text">画像:</span>
                 </label>
-                <input type="file" name="image" class="input input-bordered w-full" required>
-                
+                <img src="/images/{{ $match_user->image }}" alt="{{ $match_user->name }}" width="100">
+                <input type="file" name="image" class="input input-bordered w-full mt-3">
             </div>
 
             <button type="submit" class="btn btn-primary btn-outline">更新</button>

@@ -141,8 +141,18 @@ class PostsController extends Controller
             $post->date_day = $request->date_day;
             $post->place = $request->place;
             $post->body = $request->body;
-            $post->image = $request->image;
             $post->match_user_id = $request->match_user_id;
+            
+            // 画像の保存
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $filename); // public/images ディレクトリに保存
+                $post->image = $filename;
+            } else {
+                // 再選択なしでの更新の場合は、元の画像を保持する
+                $post->image = $post->image;
+            }
             
             // 更新を保存
             $post->save();
