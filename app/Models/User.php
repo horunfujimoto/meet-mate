@@ -57,4 +57,70 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    
+    /**
+     * このユーザが友達申請中のユーザ。（Userモデルとの関係を定義）
+     */
+    public function friends()
+    {
+        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id')->withTimestamps();
+    }
+    
+    /**
+     * このユーザに友達申請中のユーザ。（Userモデルとの関係を定義）
+     */
+    public function friendRequests()
+    {
+        return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id')->withTimestamps();
+    }
+
+    
+    /**
+     * $userIdで指定されたユーザに友達申請する。
+     *
+     * @param  int  $userId
+     * @return bool
+     */
+    public function friend($userId)
+    {
+        $exist = $this->is_friends($userId);
+        $its_me = $this->id == $userId;
+        
+        if ($exist || $its_me) {
+            return false;
+        } else {
+            $this->friends()->attach($userId);
+            return true;
+        }
+    }
+    
+    /**
+     * $userIdで指定されたユーザを友達解除する。
+     * 
+     * @param  int $usereId
+     * @return bool
+     */
+    public function unfriend($userId)
+    {
+        $exist = $this->is_friends($userId);
+        $its_me = $this->id == $userId;
+        
+        if ($exist && !$its_me) {
+            $this->friends()->detach($userId);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * 指定された$userIdのユーザをこのユーザがフォロー中であるか調べる。フォロー中ならtrueを返す。
+     * 
+     * @param  int $userId
+     * @return bool
+     */
+    public function is_friends($userId)
+    {
+        return $this->friends()->where('friend_id', $userId)->exists();
+    }
 }

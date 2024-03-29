@@ -13,7 +13,8 @@
                         {{ $user->name }}
                     </div>
                     <div>
-                        <h1>友達になるボタン入れる</h1>
+                        {{-- 友達申請・解除ボタン --}}
+                        @include('friends.friend_button')
                     </div>
                 </div>
             </li>
