@@ -7,14 +7,18 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function index()      
+    public function index()
     {
-        // ユーザ一覧をidの降順で取得
-        $users = User::orderBy('id', 'desc')->paginate(10);
-
+        // ログインユーザーのIDを取得
+        $loggedInUserId = auth()->id();
+    
+        // 自分以外のユーザーをidの降順で取得
+        $users = User::where('id', '!=', $loggedInUserId)->orderBy('id', 'desc')->paginate(10);
+    
         // ユーザ一覧ビューでそれを表示
         return view('users.index', [
             'users' => $users,
         ]);
     }
+
 }
