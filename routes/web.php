@@ -4,6 +4,7 @@ use App\Http\Controllers\UsersController; // UsersControllerを追加
 use App\Http\Controllers\MatchUsersController;// MatchUsersControllerを追加
 use App\Http\Controllers\PostsController;// PostsControllerを追加
 use App\Http\Controllers\FriendsController;// FriendsControllerを追加
+use App\Http\Controllers\FavoritesController;// FavoritesControllerを追加
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('friends', [UsersController::class, 'friends'])->name('users.friends');
         Route::get('friendRequests', [UsersController::class, 'friendRequests'])->name('users.friendRequests');
     });
+    
+    Route::group(['prefix' => 'posts/{id}'], function () {
+        Route::post('favorites', [FavoritesController::class, 'store'])->name('favorites.favorite');
+        Route::delete('unfavorite', [FavoritesController::class, 'destroy'])->name('favorites.unfavorite');
+    }); 
     
     Route::resource('users', UsersController::class, ['only' => ['index']]);
     Route::resource('match_users', MatchUsersController::class);

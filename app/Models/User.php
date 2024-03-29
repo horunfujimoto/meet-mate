@@ -134,5 +134,13 @@ class User extends Authenticatable
             $query->where('friend_id', $this->id);
         });
     }
+    
+    /**
+     * いいね（ Postモデルとの関係を定義）
+     */
+    public function favorites()
+    {
+        return $this->belongsToMany(Post::class, 'favorites', 'user_id', 'post_id')->withTimestamps();
+    }
 
 }
