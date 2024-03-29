@@ -20,5 +20,35 @@ class UsersController extends Controller
             'users' => $users,
         ]);
     }
+    
+    public function friends($id)
+    {
+        // idの値でユーザを検索して取得
+        $user = User::findOrFail($id);
+
+        // ユーザが友達申請したユーザー一覧を取得
+        $friends = $user->friends()->paginate(10);
+
+        // 一覧ビューでそれらを表示
+        return view('users.friends', [
+            'user' => $user,
+            'users' => $friends,
+        ]);
+    }
+    
+    public function friendRequests($id)
+    {
+        // idの値でユーザを検索して取得
+        $user = User::findOrFail($id);
+
+        // ユーザに友達申請くれたユーザー一覧を取得
+        $friendRequests = $user->friendRequests()->paginate(10);
+
+        // 一覧ビューでそれらを表示
+        return view('users.friendRequests', [
+            'user' => $user,
+            'users' => $friendRequests,
+        ]);
+    }
 
 }

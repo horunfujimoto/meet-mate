@@ -31,8 +31,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'users/{id}'], function () {
         Route::post('friend', [FriendsController::class, 'store'])->name('user.friend');
         Route::delete('unfriend', [FriendsController::class, 'destroy'])->name('user.unfriend');
-        Route::get('friends', [FriendsController::class, 'friends'])->name('users.friends');
-        Route::get('friendRequests', [FriendsController::class, 'friendRequests'])->name('users.friendRequests');
+        Route::get('friends', [UsersController::class, 'friends'])->name('users.friends');
+        Route::get('friendRequests', [UsersController::class, 'friendRequests'])->name('users.friendRequests');
     });
     
     Route::resource('users', UsersController::class, ['only' => ['index']]);
