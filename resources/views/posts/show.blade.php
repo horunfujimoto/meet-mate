@@ -14,7 +14,7 @@
             <p>会った場所: {{ $post->place }}</p>
             <p>内容: {{ $post->body }}</p>
             <p>画像:</p>
-            <img src="{{ $post->image }}" alt="{{ $post->name }}" width="100">
+            <img src="/images/{{ $post->image }}" alt="{{ $post->name }}" width="100">
         </div>
     </div>
     

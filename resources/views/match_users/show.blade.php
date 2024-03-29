@@ -15,7 +15,7 @@
             <p>出会い方: {{ $match_user->way }}</p>
             <p>その他: {{ $match_user->others }}</p>
             <p>画像:</p>
-            <img src="{{ $match_user->image }}" alt="{{ $match_user->name }}" width="100">
+            <img src="/images/{{ $match_user->image }}" alt="{{ $match_user->name }}"　width="100">
         </div>
     </div>
     

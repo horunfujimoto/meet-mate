@@ -63,6 +63,14 @@ class PostsController extends Controller
         $post->user_id = $user_id;
         $post->match_user_id = $request->match_user_id;
         
+        // 画像の保存
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $filename); // public/images ディレクトリに保存
+            $post->image = $filename;
+        }
+        
         $post->save();
         
         // 詳細ページ

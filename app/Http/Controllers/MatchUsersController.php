@@ -38,7 +38,7 @@ class MatchUsersController extends Controller
         $user_id = Auth::id();
         
         $match_user = new MatchUser;
-
+    
         $match_user->name = $request->name;
         $match_user->address = $request->address;
         $match_user->work = $request->work;
@@ -46,7 +46,15 @@ class MatchUsersController extends Controller
         $match_user->sns = $request->sns;
         $match_user->way = $request->way;
         $match_user->others = $request->others;
-        $match_user->image = $request->image;
+        
+        // 画像の保存
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $filename); // public/images ディレクトリに保存
+            $match_user->image = $filename;
+        }
+        
         $match_user->user_id = $user_id;
         
         $match_user->save();

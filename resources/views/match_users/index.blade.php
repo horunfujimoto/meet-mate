@@ -30,7 +30,7 @@
                     <td class="border border-gray-300 px-4 py-2">{{ $match_user->way }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $match_user->others }}</td>
                     <td class="border border-gray-300 px-4 py-2">
-                        <img src="{{ $match_user->image }}" alt="{{ $match_user->name }}" width="100">
+                        <img src="/images/{{ $match_user->image }}" alt="{{ $match_user->name }}"　width="200">
                     </td>
                 </tr>
                 @endforeach
