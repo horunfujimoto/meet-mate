@@ -13,17 +13,22 @@ class PostsController extends Controller
     public function index()
     {
         if (\Auth::check()) {
-            // みんなの投稿一覧をidの降順で取得
-            $posts = Post::orderBy('id', 'desc')->paginate(10);
             
-            // ユーザ名を取得して$postに追加する
+            $user = auth()->user(); // ログイン中のユーザーを取得
+        
+            // 自分と相互に友達申請しているユーザーのIDを取得
+            $friendIds = $user->myfriends()->pluck('users.id')->toArray();
+            $friendIds[] = $user->id; // 自分自身のIDも追加
+        
+            // 友達と自分の投稿一覧を取得
+            $posts = Post::whereIn('posts.user_id', $friendIds)->orderBy('posts.id', 'desc')->paginate(10); // postsテーブルのid列を指定
+                        
             foreach ($posts as $post) {
                 $match_user = MatchUser::find($post->match_user_id);
                 // $match_userがnullでないことを前提として、直接名前を代入する
                 $post->match_user_name = $match_user->name;
             }
         
-            // ユーザ一覧ビューでそれを表示
             return view('posts.index', [
                 'posts' => $posts,
             ]);
