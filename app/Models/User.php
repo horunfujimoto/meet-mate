@@ -150,7 +150,7 @@ class User extends Authenticatable
     {
         $exist = $this->is_favorite($postId);
 
-        // すでにお気に入りに追加されているかチェック
+        // すでにいいねに追加されているかチェック
         if ($exist) {
             return false;
         } else {
@@ -176,7 +176,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 指定されたMicropostがいいねに追加されているかチェックする。
+     * 指定されたpostがいいねに追加されているかチェックする。
      */
     public function is_favorite($postId)
     {
