@@ -31,5 +31,10 @@
             <button type="submit" class="btn btn-error btn-outline" 
                 onclick="return confirm('削除してもよろしいですか？')">削除</button>
         </form>
+    @else
+        <div>
+            {{-- いいね --}}
+            @include('favorites.favorite_button')
+        </div>
     @endif
 @endsection
