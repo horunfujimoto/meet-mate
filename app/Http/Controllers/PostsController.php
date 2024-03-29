@@ -12,20 +12,26 @@ class PostsController extends Controller
 
     public function index()
     {
-        // みんなの投稿一覧をidの降順で取得
-        $posts = Post::orderBy('id', 'desc')->paginate(10);
+        if (\Auth::check()) {
+            // みんなの投稿一覧をidの降順で取得
+            $posts = Post::orderBy('id', 'desc')->paginate(10);
+            
+            // ユーザ名を取得して$postに追加する
+            foreach ($posts as $post) {
+                $match_user = MatchUser::find($post->match_user_id);
+                // $match_userがnullでないことを前提として、直接名前を代入する
+                $post->match_user_name = $match_user->name;
+            }
         
-        // ユーザ名を取得して$postに追加する
-        foreach ($posts as $post) {
-            $match_user = MatchUser::find($post->match_user_id);
-            // $match_userがnullでないことを前提として、直接名前を代入する
-            $post->match_user_name = $match_user->name;
+            // ユーザ一覧ビューでそれを表示
+            return view('posts.index', [
+                'posts' => $posts,
+            ]);
         }
-    
-        // ユーザ一覧ビューでそれを表示
-        return view('posts.index', [
-            'posts' => $posts,
-        ]);
+        
+        // 前のURLへリダイレクトさせる
+        return back()
+            ->with('Delete Failed');
     }
 
     public function create()
@@ -102,42 +108,57 @@ class PostsController extends Controller
         // MatchUser の ID を使って名前を取得
         $match_user = MatchUser::findOrFail($match_user_id);
         
-        // ビューにデータを渡す
-        return view('posts.edit', [
-            'post' => $post,
-            'user' => $user,
-            'match_user' => $match_user,
-            'match_users' => $match_users, // $match_users を追加
-        ]);
+        if (\Auth::id() === $post->user_id) {
+            // ビューにデータを渡す
+            return view('posts.edit', [
+                'post' => $post,
+                'user' => $user,
+                'match_user' => $match_user,
+                'match_users' => $match_users, // $match_users を追加
+            ]);
+        }
+         // 前のURLへリダイレクトさせる
+        return back()
+            ->with('Delete Failed');
     }
 
     public function update(Request $request, $id)
     {
         // 更新対象の投稿を取得
         $post = Post::findOrFail($id);
-    
-        // フォームから送信されたデータで投稿を更新
-        $post->title = $request->title;
-        $post->date_day = $request->date_day;
-        $post->place = $request->place;
-        $post->body = $request->body;
-        $post->image = $request->image;
-        $post->match_user_id = $request->match_user_id;
         
-        // 更新を保存
-        $post->save();
-        
-        // 保存後、投稿の詳細ページにリダイレクト
-        return redirect()->route('posts.show', $post->id);
+        if (\Auth::id() === $post->user_id) {
+            // フォームから送信されたデータで投稿を更新
+            $post->title = $request->title;
+            $post->date_day = $request->date_day;
+            $post->place = $request->place;
+            $post->body = $request->body;
+            $post->image = $request->image;
+            $post->match_user_id = $request->match_user_id;
+            
+            // 更新を保存
+            $post->save();
+            
+            // 保存後、投稿の詳細ページにリダイレクト
+            return redirect()->route('posts.show', $post->id);
+        }
+         // 前のURLへリダイレクトさせる
+        return back()
+            ->with('Delete Failed');
     }
 
     public function destroy($id)
     {
         // idを検索して取得
         $post = Post::findOrFail($id);
-        // 削除
-        $post->delete();
-        // 一覧ページ
-        return redirect()->route('posts.index');
+        if (\Auth::id() === $post->user_id) {
+            // 削除
+            $post->delete();
+            // 一覧ページ
+            return redirect()->route('posts.index');
+        }
+         // 前のURLへリダイレクトさせる
+        return back()
+            ->with('Delete Failed');
     }
 }

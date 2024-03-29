@@ -20,15 +20,16 @@
     
     {{-- 一覧ページへのリンク --}}
     <a class="btn btn-outline" href="{{ route('posts.index') }}">みんなの投稿一覧</a>
-    
-    {{-- 編集ページへのリンク --}}
-    <a class="btn btn-outline" href="{{ route('posts.edit', $post->id) }}">編集</a>
-    {{-- 削除フォーム --}}
-    <form method="POST" action="{{ route('posts.destroy', $post->id) }}" class="my-2">
-        @csrf
-        @method('DELETE')
-        
-        <button type="submit" class="btn btn-error btn-outline" 
-            onclick="return confirm('削除してもよろしいですか？')">削除</button>
-    </form>
+    @if (Auth::id() == $post->user_id)
+        {{-- 編集ページへのリンク --}}
+        <a class="btn btn-outline" href="{{ route('posts.edit', $post->id) }}">編集</a>
+        {{-- 削除フォーム --}}
+        <form method="POST" action="{{ route('posts.destroy', $post->id) }}" class="my-2">
+            @csrf
+            @method('DELETE')
+            
+            <button type="submit" class="btn btn-error btn-outline" 
+                onclick="return confirm('削除してもよろしいですか？')">削除</button>
+        </form>
+    @endif
 @endsection
