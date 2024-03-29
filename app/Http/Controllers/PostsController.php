@@ -19,7 +19,7 @@ class PostsController extends Controller
         foreach ($posts as $post) {
             $match_user = MatchUser::find($post->match_user_id);
             // $match_userがnullでないことを前提として、直接名前を代入する
-            $match_user = MatchUser::findOrFail($match_user_id);
+            $post->match_user_name = $match_user->name;
         }
     
         // ユーザ一覧ビューでそれを表示

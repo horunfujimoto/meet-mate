@@ -23,6 +23,9 @@ return new class extends Migration
             $table->string('image');
             $table->string('body');
             $table->timestamps();
+
+            // 外部キー制約を追加
+            $table->foreign('match_user_id')->references('id')->on('match_users')->onDelete('cascade'); 
         });
     }
 
