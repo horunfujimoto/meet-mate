@@ -38,4 +38,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UsersController::class, ['only' => ['index']]);
     Route::resource('match_users', MatchUsersController::class);
     Route::resource('posts', PostsController::class);
+    Route::resource('myfriends', FriendsController::class, ['only' => ['index']]);
 });

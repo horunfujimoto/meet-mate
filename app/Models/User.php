@@ -114,7 +114,7 @@ class User extends Authenticatable
     }
     
     /**
-     * 指定された$userIdのユーザをこのユーザがフォロー中であるか調べる。フォロー中ならtrueを返す。
+     * 指定された$userIdのユーザをこのユーザが友達申請中であるか調べる。
      * 
      * @param  int $userId
      * @return bool
@@ -123,4 +123,16 @@ class User extends Authenticatable
     {
         return $this->friends()->where('friend_id', $userId)->exists();
     }
+    
+    /**
+     * 
+     *相互で友達申請をしている場合
+     */
+    public function myfriends()
+    {
+        return $this->friends()->whereHas('friends', function ($query) {
+            $query->where('friend_id', $this->id);
+        });
+    }
+
 }
