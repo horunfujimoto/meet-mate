@@ -96,11 +96,15 @@ class PostsController extends Controller
         // MatchUser の ID を使って名前を取得
         $match_user = MatchUser::findOrFail($match_user_id);
         
+        // 投稿に紐づくコメント一覧を取得
+        $comments = $post->comments()->get();
+        
         // ビューにデータを渡す
         return view('posts.show', [
             'post' => $post,
             'user' => $user,
             'match_user' => $match_user,
+            'comments' => $comments, // コメント一覧を渡す
         ]);
     }
 

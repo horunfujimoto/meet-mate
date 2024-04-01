@@ -32,4 +32,12 @@ class Post extends Model
     {
         return $this->belongsToMany(User::class, 'favorites', 'post_id', 'user_id')->withTimestamps();
     }
+    
+    /**
+     * コメント（commentモデルとの関係を定義）
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

@@ -184,5 +184,13 @@ class User extends Authenticatable
                                   ->where('favorites.user_id', $this->id)
                                   ->exists();
     }
+    
+    /**
+     * コメント（commentモデルとの関係を定義）
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 
 }

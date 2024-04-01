@@ -37,4 +37,13 @@
             @include('favorites.favorite_button')
         </div>
     @endif
+    
+    <div>
+        {{-- コメントフォーム --}}
+        @include('comments.form')
+    </div>
+    <div>
+        {{-- コメント一覧 --}}
+        @include('comments.comments')
+    </div>
 @endsection
