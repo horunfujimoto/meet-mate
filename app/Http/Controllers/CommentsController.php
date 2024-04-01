@@ -46,7 +46,7 @@ class CommentsController extends Controller
         // 関連する投稿を取得
         $post = $comment->post;
     
-        if (\Auth::id() === $post->user_id) {
+        if (\Auth::id() === $comment->user_id) {
             $comment->delete();
             return redirect()->route('posts.show', $post->id);
         }
