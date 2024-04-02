@@ -4,13 +4,13 @@
         <form action="{{ route('post.unfavorite', $post->id) }}" method="POST">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-outline-danger">いいねをやめる</button>
+            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-heart">いいね済</i></button>
         </form>
     @else
         {{-- いいねしていない場合 --}}
         <form action="{{ route('post.favorite', $post->id) }}" method="POST">
             @csrf
-            <button type="submit" class="btn btn-outline-primary">いいね！</button>
+            <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-heart">いいね</i></button>
         </form>
     @endif
 @endif

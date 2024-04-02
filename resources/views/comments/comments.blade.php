@@ -17,7 +17,7 @@
                                 <form method="POST" action="{{ route('comments.destroy', $comment->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('削除しますか？')">削除</button>
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('削除しますか？')"><i class="fa-solid fa-trash"></i></button>
                                 </form>
                             @endif
                         </div>
