@@ -9,7 +9,7 @@
         <div class="row mt-4">
             <table class="table table-bordered ">
                 <div class="py-2">
-                    <thead>
+                    <thead style="background-color: #FFCCCC;">
                         <tr>
                             <th class="border border-gray-300 px-4 py-2">名前</th>
                             <th class="border border-gray-300 px-4 py-2">住んでる場所</th>
