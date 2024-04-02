@@ -1,19 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="sm:grid sm:grid-cols-3 sm:gap-10">
-        <aside class="mt-4">
-        </aside>
-        <div class="sm:col-span-2 mt-4">
-            <div class="mt-4">
-                {{-- ユーザ一覧 --}}
-                @include('users.users')
-            </div>
-
-            {{-- 自分へ友達申請しているのユーザーがいない場合のメッセージ --}}
+<div class="mx-auto">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="title">ユーザー関連</h2>
+    </div>
+    <div class="row mt-4">
+        <div class="py-2">
+            @include('users.nabtabs')
+        </div>
+        <div class="pt-4">
+            @include('users.users')
+            {{-- 自分が申請中のユーザーがいない場合のメッセージ --}}
             @if($users->isEmpty())
                 <p>友達申請はきていません。</p>
             @endif
         </div>
+        
     </div>
+</div>
 @endsection

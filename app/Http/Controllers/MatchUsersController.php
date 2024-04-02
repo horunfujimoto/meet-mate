@@ -11,16 +11,6 @@ class MatchUsersController extends Controller
     
     public function index()
     {
-        // $user = auth()->user();
-        
-        // // 自分の投稿のみを取得し、idの降順で10件ずつページネーションして取得
-        // $match_users = MatchUser::where('user_id', $user)->orderBy('id', 'desc')->paginate(10);
-    
-        // // ユーザ一覧ビューでそれを表示
-        // return view('match_users.index', [
-        //     'match_users' => $match_users,
-        // ]);
-        
         $user = auth()->user();
     
         // 自分の投稿のみを取得し、idの降順で10件ずつページネーションして取得

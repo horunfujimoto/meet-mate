@@ -1,16 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-
-    {{-- ユーザ一覧 --}}
-    @include('users.users')
-
-    <a href="{{ route('users.friends', auth()->id()) }}" class="tab tab-lifted grow {{ Request::routeIs('users.friends') ? 'tab-active' : '' }}">
-        友達申請をしているユーザー
-    </a>
-
-    <a href="{{ route('users.friendRequests', auth()->id()) }}" class="tab tab-lifted grow {{ Request::routeIs('users.friendRequests') ? 'tab-active' : '' }}">
-        友達申請をくれたユーザー
-    </a>
-
+<div class="mx-auto">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="title">ユーザー関連</h2>
+    </div>
+    <div class="row mt-4">
+        <div class="py-2">
+            @include('users.nabtabs')
+        </div>
+        <div class="pt-4">
+            @include('users.users')
+        </div>
+        
+    </div>
+</div>
 @endsection
