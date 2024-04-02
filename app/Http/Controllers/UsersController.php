@@ -25,10 +25,10 @@ class UsersController extends Controller
     {
         // idの値でユーザを検索して取得
         $user = User::findOrFail($id);
-
-        // ユーザが友達申請したユーザー一覧を取得
-        $friends = $user->friends()->paginate(10);
-
+    
+        // 自分が友達申請したユーザーかつ友達でないユーザー一覧を取得
+        $friends = $user->friends()->whereNotIn('users.id', $user->myfriends()->pluck('users.id'))->paginate(10);
+    
         // 一覧ビューでそれらを表示
         return view('users.friends', [
             'user' => $user,
@@ -40,15 +40,17 @@ class UsersController extends Controller
     {
         // idの値でユーザを検索して取得
         $user = User::findOrFail($id);
-
-        // ユーザに友達申請くれたユーザー一覧を取得
-        $friendRequests = $user->friendRequests()->paginate(10);
-
+    
+        // 自分が友達申請を受けたユーザーかつ友達でないユーザー一覧を取得
+        $friendRequests = $user->friendRequests()->whereNotIn('users.id', $user->myfriends()->pluck('users.id'))->paginate(10);
+    
         // 一覧ビューでそれらを表示
         return view('users.friendRequests', [
             'user' => $user,
             'users' => $friendRequests,
         ]);
     }
+
+
 
 }
