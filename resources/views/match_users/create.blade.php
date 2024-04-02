@@ -53,7 +53,7 @@
                 
             </div>
 
-            <button type="submit" class="btn btn-primary btn-outline">投稿</button>
+            <button type="submit" class="btn btn-outline" style="background-color: #FF6699; color: white; font-size: 1.2rem;">投稿</button>
         </form>
     </div>
 @endsection
