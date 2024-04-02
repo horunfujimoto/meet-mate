@@ -11,13 +11,9 @@
                 <div class="py-2">
                     <thead style="background-color: #FFCCCC;">
                         <tr>
-                            <th class="border border-gray-300 px-4 py-2">名前</th>
+                            <th class="border border-gray-300 px-4 py-2">出会った方</th>
                             <th class="border border-gray-300 px-4 py-2">住んでる場所</th>
-                            <th class="border border-gray-300 px-4 py-2">職業</th>
-                            <th class="border border-gray-300 px-4 py-2">誕生日</th>
-                            <th class="border border-gray-300 px-4 py-2">SNS</th>
                             <th class="border border-gray-300 px-4 py-2">出会い方</th>
-                            <th class="border border-gray-300 px-4 py-2">その他</th>
                             <th class="border border-gray-300 px-4 py-2">画像</th>
                         </tr>
                     </thead>
@@ -26,11 +22,7 @@
                         <tr onclick="window.location='{{ route('match_users.show', $match_user->id) }}';" style="cursor:pointer;">
                             <td class="border border-gray-300 px-4 py-2">{{ $match_user->name }}</td>
                             <td class="border border-gray-300 px-4 py-2">{{ $match_user->address }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $match_user->work }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $match_user->birthday }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $match_user->sns }}</td>
                             <td class="border border-gray-300 px-4 py-2">{{ $match_user->way }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $match_user->others }}</td>
                             <td class="border border-gray-300 px-4 py-2">
                                 <img src="/images/{{ $match_user->image }}" alt="{{ $match_user->name }}" width="50" height="auto">
                             </td>
