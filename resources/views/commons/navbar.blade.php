@@ -1,14 +1,14 @@
 <header class="mb-4">
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar" style="background-color: #FF6699; font-size: 1.2rem;">
         {{-- トップページへのリンク --}}
         <div class="d-flex align-items-center">
-            <h1 class="font-weight-bold"><a class="btn text-white" href="/dashboard">meet-mate</a></h1>
+            <h1 class="font-weight-bold"><a class="link" href="/dashboard">meet-mate</a></h1>
         </div>
         {{-- その他リンク --}}
         <div class="d-flex align-items-center">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <ul class="list-inline mb-0 text-white d-flex">
+                <ul class="mb-0">
                     @include('commons.link_items')
                 </ul>
             </form>
