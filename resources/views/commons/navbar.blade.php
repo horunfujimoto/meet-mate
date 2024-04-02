@@ -2,7 +2,7 @@
     <nav class="navbar navbar-dark bg-dark">
         {{-- トップページへのリンク --}}
         <div class="d-flex align-items-center">
-            <h1 class="m-0 font-weight-bold"><a class="btn text-white" href="/">meet-mate</a></h1>
+            <h1 class="font-weight-bold"><a class="btn text-white" href="/dashboard">meet-mate</a></h1>
         </div>
         {{-- その他リンク --}}
         <div class="d-flex align-items-center">
