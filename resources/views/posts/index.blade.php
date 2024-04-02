@@ -4,7 +4,7 @@
     <div class="mx-auto">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="title">みんなの投稿一覧</h2>
-            <a href="{{ route('posts.create') }}" class="btn btn-hover" style="background-color: #FF6699; color: white; font-size: 1.2rem;">投稿作成</a>
+            <a href="{{ route('posts.create') }}" class="btn btn-hover" style="background-color: #FF6699; color: white; font-size: 1.2rem;">投稿 <i class="fa-solid fa-pen-nib"></i></a>
         </div>
         <div class="row mt-4">
             <table class="table table-bordered ">
