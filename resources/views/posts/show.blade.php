@@ -28,26 +28,34 @@
             </div>
         </div>
         
-        <div class="row">
-            <div class="edit-delete favorite mt-4">
-                @if (Auth::id() == $post->user_id)
-                    {{-- 編集ページへのリンク --}}
-                    <a class="btn " href="{{ route('posts.edit', $post->id) }}" style="background-color: #FF6699; color: white; font-size: 1.2rem;"><i class="fa-regular fa-pen-to-square"></i></a>
-                    {{-- 削除フォーム --}}
-                    <form method="POST" action="{{ route('posts.destroy', $post->id) }}" class="my-2">
-                        @csrf
-                        @method('DELETE')
-                        
-                        <button type="submit" class="btn" 
-                            onclick="return confirm('削除してもよろしいですか？')" style="background-color: #FF6699; color: white; font-size: 1.2rem;"><i class="fa-solid fa-trash"></i></button>
-                    </form>
-                @else
-                    <div>
-                        {{-- いいね --}}
-                        @include('favorites.favorite_button')
-                    </div>
-                @endif
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="edit-delete favorite mt-4 text-center">
+                    @if (Auth::id() == $post->user_id)
+                        {{-- 編集ページへのリンク --}}
+                        <div class="d-inline-block mr-2">
+                            <a class="btn " href="{{ route('posts.edit', $post->id) }}" style="background-color: #FF6699; color: white; font-size: 1.2rem;"><i class="fa-regular fa-pen-to-square"></i></a>
+                        </div>
+                        {{-- 削除フォーム --}}
+                        <div class="d-inline-block mr-2">
+                            <form method="POST" action="{{ route('posts.destroy', $post->id) }}" class="my-2">
+                                @csrf
+                                @method('DELETE')
+                                
+                                <button type="submit" class="btn" onclick="return confirm('削除してもよろしいですか？')" style="background-color: #FF6699; color: white; font-size: 1.2rem;"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
+                    @else
+                        <div>
+                            {{-- いいね --}}
+                            @include('favorites.favorite_button')
+                        </div>
+                    @endif
+                </div>
             </div>
+        </div>
+        
+        <div class="row">
             <div class="comment">
                 {{-- コメントフォーム --}}
                 @include('comments.form')
