@@ -29,29 +29,28 @@
             </div>
         </div>
         
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="edit-delete mt-4 text-center">
-            @if (Auth::id() == $match_user->user_id)
-                {{-- 編集ページへのリンク --}}
-                <div class="d-inline-block mr-2">
-                    <a class="btn" href="{{ route('match_users.edit', $match_user->id) }}" style="background-color: #FF6699; color: white; font-size: 1.2rem;"><i class="fa-regular fa-pen-to-square"></i></a>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="edit-delete mt-4 text-center">
+                    @if (Auth::id() == $match_user->user_id)
+                        {{-- 編集ページへのリンク --}}
+                        <div class="d-inline-block mr-2">
+                            <a class="btn" href="{{ route('match_users.edit', $match_user->id) }}" style="background-color: #FF6699; color: white; font-size: 1.2rem;"><i class="fa-regular fa-pen-to-square"></i></a>
+                        </div>
+                        {{-- 削除フォーム --}}
+                        <div class="d-inline-block mr-2">
+                            <form method="POST" action="{{ route('match_users.destroy', $match_user->id) }}" class="my-2">
+                                @csrf
+                                @method('DELETE')
+                                
+                                <button type="submit" class="btn" 
+                                    onclick="return confirm('削除してもよろしいですか？')" style="background-color: #FF6699; color: white; font-size: 1.2rem;"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
-                {{-- 削除フォーム --}}
-                <div class="d-inline-block mr-2">
-                    <form method="POST" action="{{ route('match_users.destroy', $match_user->id) }}" class="my-2">
-                        @csrf
-                        @method('DELETE')
-                        
-                        <button type="submit" class="btn" 
-                            onclick="return confirm('削除してもよろしいですか？')" style="background-color: #FF6699; color: white; font-size: 1.2rem;"><i class="fa-solid fa-trash"></i></button>
-                    </form>
-                </div>
-            @endif
+            </div>
         </div>
-    </div>
-</div>
-
         
     </div>
 @endsection
