@@ -7,19 +7,37 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // ログインユーザーのIDを取得
-        $loggedInUserId = auth()->id();
+        if (\Auth::check()) {
+        
+            // ログインユーザーのIDを取得
+            $loggedInUserId = auth()->id();
+            
+            // ユーザークエリを取得
+            $query = User::where('id', '!=', $loggedInUserId)->orderBy('id', 'desc');
+            
+            // キーワードが指定されていれば、名前で部分一致検索を行う
+            if ($request->has('keyword') && !empty($request->keyword)) {
+                $keyword = $request->keyword;
+                $query->where('name', 'like', "%$keyword%");
+            }
+            
+            // ページネーションを適用
+            $users = $query->paginate(10);
+            
+            // ユーザ一覧ビューでそれを表示
+            return view('users.index', [
+                'users' => $users,
+                'keyword' => $request->keyword ?? '', // ビューにキーワードを渡す
+            ]);
+            
+        }
     
-        // 自分以外のユーザーをidの降順で取得
-        $users = User::where('id', '!=', $loggedInUserId)->orderBy('id', 'desc')->paginate(10);
-    
-        // ユーザ一覧ビューでそれを表示
-        return view('users.index', [
-            'users' => $users,
-        ]);
+        // 前のURLへリダイレクトさせる
+        return back()->with('Delete Failed');
     }
+
     
     public function friends($id)
     {

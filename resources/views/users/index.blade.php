@@ -10,6 +10,12 @@
             @include('users.nabtabs')
         </div>
         <div class="pt-4">
+            <form action="{{ route('users.index') }}" method="GET" class="ml-auto d-flex align-items-center">
+                <div class="col-auto">
+                    <input type="text" name="keyword" value="{{ $keyword }}" placeholder="ユーザー名を入力" class="form-control mr-2" style="width: 15em;">
+                </div>
+                <button type="submit" class="btn btn-hover" style="background-color: #FF6699; color: white; font-size: 1.2rem; margin-top: auto;"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
             @include('users.users')
         </div>
         
