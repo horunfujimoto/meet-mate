@@ -188,4 +188,5 @@ class PostsController extends Controller
         return back()
             ->with('Delete Failed');
     }
+
 }
