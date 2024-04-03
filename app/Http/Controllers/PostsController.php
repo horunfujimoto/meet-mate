@@ -9,35 +9,42 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-
-    public function index()
+    
+    public function index(Request $request)
     {
         if (\Auth::check()) {
             
             $user = auth()->user(); // ログイン中のユーザーを取得
-        
-            // 自分と相互に友達申請しているユーザーのIDを取得
+            
             $friendIds = $user->myfriends()->pluck('users.id')->toArray();
             $friendIds[] = $user->id; // 自分自身のIDも追加
-        
-            // 友達と自分の投稿一覧を取得
-            $posts = Post::whereIn('posts.user_id', $friendIds)->orderBy('posts.id', 'desc')->paginate(10); // postsテーブルのid列を指定
-                        
+    
+            $query = Post::query()->whereIn('posts.user_id', $friendIds)->orderBy('posts.id', 'desc');
+    
+            // キーワードが指定されていれば、タイトルで部分一致検索を行う
+            if ($request->has('keyword') && !empty($request->keyword)) {
+                $keyword = $request->keyword;
+                $query->where('title', 'like', "%$keyword%");
+            }
+    
+            $posts = $query->paginate(10);
+    
             foreach ($posts as $post) {
                 $match_user = MatchUser::find($post->match_user_id);
                 // $match_userがnullでないことを前提として、直接名前を代入する
                 $post->match_user_name = $match_user->name;
             }
-        
+    
             return view('posts.index', [
                 'posts' => $posts,
+                'keyword' => $request->keyword ?? '', // ビューにキーワードを渡す
             ]);
         }
-        
+    
         // 前のURLへリダイレクトさせる
-        return back()
-            ->with('Delete Failed');
+        return back()->with('Delete Failed');
     }
+
 
     public function create()
     {
