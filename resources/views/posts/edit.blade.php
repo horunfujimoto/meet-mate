@@ -43,14 +43,29 @@
                 <input type="text" name="body" value="{{ $post->body }}" class="input input-bordered w-full" required>
                 
                 <label for="image" class="label">
-                    <span class="label-text">画像:</span>
+                    <span class="label-text"デート写真(変更前):</span>
                 </label>
                 <img src="/images/{{ $post->image }}" alt="{{ $post->name }}" width="100">
-                <input type="file" name="image" class="input input-bordered w-full mt-3">
+                <input type="file" name="image" class="input input-bordered w-full mt-3" id="myImage" accept="image/*">
+                <img id="preview" src="#" alt="プレビュー画像" width="200px" height="auto">
                 
             </div>
 
             <button type="submit" class="btn btn-outline" style="background-color: #FF6699; color: white; font-size: 1.2rem;">更新</button>
         </form>
     </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myImage').on('change', function (e) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#preview").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files[0]);
+           });
+        }); 
+    </script>
+    
 @endsection

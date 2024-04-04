@@ -44,11 +44,27 @@
                 <label for="image" class="label">
                     <span class="label-text">デート写真:</span>
                 </label>
-                <input type="file" name="image" class="input input-bordered w-full" required>
+                
+                <input type="file" name="image" class="input input-bordered w-full" required id="myImage" accept="image/*">
+                <img id="preview" src="#" alt="プレビュー画像" width="200px" height="auto">
                 
             </div>
 
             <button type="submit" class="btn btn-outline" style="background-color: #FF6699; color: white; font-size: 1.2rem;">投稿</button>
         </form>
     </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myImage').on('change', function (e) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#preview").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files[0]);
+           });
+        }); 
+    </script>
+    
 @endsection
