@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title', 20);
             $table->string('date_day');
             $table->string('place', 20);
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('body');
             $table->timestamps();
 

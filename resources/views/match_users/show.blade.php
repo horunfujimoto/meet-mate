@@ -23,7 +23,7 @@
                     <p>職業: {{ $match_user->work }}</p>
                     <p>誕生日: {{ $match_user->birthday }}</p>
                     <p>SNS: {{ $match_user->sns }}</p>
-                    <p>出会い方: {{ $match_user->way }}</p>
+                    <p>出会い方: {{ $way->way }}</p>
                     <p>その他: {{ $match_user->others }}</p>
                 </div>
             </div>

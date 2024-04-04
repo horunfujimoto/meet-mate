@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MatchUser; // MatchUserモデルをインポート
 use Illuminate\Support\Facades\Auth; // Authをインポート
+use App\Models\Way;
 use Illuminate\Http\Request;
 
 class MatchUsersController extends Controller
@@ -15,20 +16,25 @@ class MatchUsersController extends Controller
     
         // 自分の投稿のみを取得し、idの降順で10件ずつページネーションして取得
         $match_users = MatchUser::where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10);
+        $ways = Way::all();
     
         // ユーザ一覧ビューでそれを表示
         return view('match_users.index', [
             'match_users' => $match_users,
+            'ways' => $ways, // $waysをビューに渡す
         ]);
     }
 
     public function create()
     {
         $match_user = new MatchUser;
-
+        // Wayモデルからデータを取得し、$waysに代入
+        $ways = Way::all();
+    
         // 作成ビューを表示
         return view('match_users.create', [
             'match_user' => $match_user,
+            'ways' => $ways, // $waysをビューに渡す
         ]);
     }
 
@@ -44,8 +50,8 @@ class MatchUsersController extends Controller
         $match_user->work = $request->work;
         $match_user->birthday = $request->birthday;
         $match_user->sns = $request->sns;
-        $match_user->way = $request->way;
         $match_user->others = $request->others;
+        $match_user->way_id = $request->way_id;
         
         // 画像の保存
         if ($request->hasFile('image')) {
@@ -67,10 +73,14 @@ class MatchUsersController extends Controller
     {
         // idの値で検索して取得
         $match_user = MatchUser::findOrFail($id);
-
+        
+        // 出会い方（Way）の情報を取得
+        $way = Way::findOrFail($match_user->way_id);
+    
         // 詳細ビューでそれを表示
         return view('match_users.show', [
             'match_user' => $match_user,
+            'way' => $way, // 出会い方（Way）の情報をビューに渡す
         ]);
     }
 

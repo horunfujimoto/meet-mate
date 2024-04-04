@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('match_users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('way_id');
             $table->string('name', 20);
             $table->string('address', 20);
             $table->string('work', 20);
-            $table->string('birthday');
-            $table->string('sns');
-            $table->string('way', 20);
-            $table->string('others');
-            $table->string('image');
+            $table->string('birthday')->nullable();
+            $table->string('sns')->nullable();
+            $table->string('others')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

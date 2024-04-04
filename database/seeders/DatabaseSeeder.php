@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Way;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +15,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $ways = [
+            ['way' => '職場'],
+            ['way' => '学校'],
+            ['way' => 'バイト'],
+            ['way' => 'マッチングアプリ'],
+            ['way' => '合コン'],
+            ['way' => 'SNS'],
+            ['way' => 'ナンパ'],
+            ['way' => '紹介'],
+            ['way' => '恋活イベント'],
+            ['way' => '婚活イベント'],
+            ['way' => 'その他'],
+        ];
+    
+        // シーディングされたデータをデータベースに挿入
+        Way::insert($ways);
+    
     }
 }

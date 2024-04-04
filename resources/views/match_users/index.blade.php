@@ -22,7 +22,13 @@
                         <tr onclick="window.location='{{ route('match_users.show', $match_user->id) }}';" style="cursor:pointer;">
                             <td class="border border-gray-300 px-4 py-2">{{ $match_user->name }}</td>
                             <td class="border border-gray-300 px-4 py-2">{{ $match_user->address }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ $match_user->way }}</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                @foreach($ways as $way)
+                                    @if($way->id === $match_user->way_id)
+                                        {{ $way->way }}
+                                    @endif
+                                @endforeach
+                            </td>
                             <td class="border border-gray-300 px-4 py-2">
                                 <img src="/images/{{ $match_user->image }}" alt="{{ $match_user->name }}" width="50" height="auto">
                             </td>

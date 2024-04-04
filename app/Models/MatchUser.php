@@ -25,14 +25,11 @@ class MatchUser extends Model
         return $this->hasMany(Post::class);
     }
     
-    // protected $fillable = [
-    //     'name', 
-    //     'address',
-    //     'work',
-    //     'birthday',
-    //     'sns',
-    //     'way',
-    //     'others',
-    //     'image',
-    // ];
+    /**
+     * 出会った方と紐づく出会い方。（ waysモデルとの関係を定義）
+     */
+    public function ways()
+    {
+        return $this->hasMany(Way::class);
+    }
 }
