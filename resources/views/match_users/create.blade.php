@@ -47,7 +47,7 @@
                 <input type="text" name="others" class="input input-bordered w-full" required>
                 
                 <label for="image" class="label">
-                    <span class="label-text">画像:</span>
+                    <span class="label-text">プロフィール画像:</span>
                 </label>
                 <input type="file" name="image" class="input input-bordered w-full" required>
                 

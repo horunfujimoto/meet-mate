@@ -42,7 +42,7 @@
                 <input type="text" name="body" class="input input-bordered w-full" required>
                 
                 <label for="image" class="label">
-                    <span class="label-text">画像:</span>
+                    <span class="label-text">デート写真:</span>
                 </label>
                 <input type="file" name="image" class="input input-bordered w-full" required>
                 
