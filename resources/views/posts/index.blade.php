@@ -3,39 +3,28 @@
 @section('content')
     <div class="mx-auto">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="title">みんなの投稿一覧</h2>
-            {{-- 検索機能 --}}
+            <h2 class="title">投稿一覧</h2>
             <div class="d-flex align-items-center">
-                <form action="{{ route('posts.index') }}" method="GET" class="ml-auto d-flex align-items-center">
-                    <input type="text" name="keyword" value="{{ $keyword }}" placeholder="キーワードを入力" class="form-control mr-2">
-                    <button type="submit" class="btn btn-hover" style="background-color: #FF6699; color: white; font-size: 1.2rem; margin-top: auto;"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </form>
                 <a href="{{ route('posts.create') }}" class="btn btn-hover mx-3" style="background-color: #FF6699; color: white; font-size: 1.2rem;">投稿 <i class="fa-solid fa-pen-nib"></i></a>
             </div>
         </div>
         <div class="row mt-4">
-            <table class="table table-bordered ">
-                <div class="py-2">
-                    <thead style="background-color: #FFCCCC;">
-                        <tr>
-                            <th class="border border-gray-300 px-4 py-2">投稿者</th>
-                            <th class="border border-gray-300 px-4 py-2">タイトル</th>
-                            <th class="border border-gray-300 px-4 py-2">会った日</th>
-                            <th class="border border-gray-300 px-4 py-2">会った方</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                         @foreach($posts as $post)
-                            <tr onclick="window.location='{{ route('posts.show', $post->id) }}';" style="cursor:pointer;">
-                                <td class="border border-gray-300 px-4 py-2">{{ $post->user->name }}</td>
-                                <td class="border border-gray-300 px-4 py-2">{{ $post->title }}</td>
-                                <td class="border border-gray-300 px-4 py-2">{{ $post->date_day }}</td>
-                                <td class="border border-gray-300 px-4 py-2">{{ $post->match_user_name }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </div>
-            </table>
+            <div class="py-2">
+                @include('posts.nabtabs')
+            </div>
+
+            <div class="pt-4">
+                {{-- 検索機能 --}}
+                <form action="{{ route('posts.index') }}" method="GET" class="ml-auto d-flex align-items-center">
+                    <input type="text" name="keyword" value="{{ $keyword }}" placeholder="キーワードを入力" class="form-control mr-2" style="width: 15em;">
+                    <button type="submit" class="btn btn-hover" style="background-color: #FF6699; color: white; font-size: 1.2rem; margin-top: auto;"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                
+                {{-- 投稿一覧 --}}
+                @include('posts.posts')
+                
+            </div>
+            
         </div>
     </div>
 @endsection
