@@ -49,6 +49,29 @@
                 <input type="file" name="image" class="input input-bordered w-full mt-3" id="myImage" accept="image/*">
                 <img id="preview" src="#" alt="プレビュー画像" width="200px" height="auto">
                 
+                <!-- ここに公開ステータスを選ぶ記述 -->
+                <label for="status" class="label">
+                    <span class="label-text">公開ステータス:</span>
+                </label>
+                <select id="status" name="status" class="form-control">
+                    <option value="public">公開</option>
+                    <option value="private">非公開</option>
+                    <option value="limited">限定公開</option>
+                </select>
+                
+                <!-- 限定公開選択フィールド -->
+                <div id="limited_input" style="display: none;">
+                    <label for="limited" class="label">
+                        <span class="label-text">公開する友達を選択してください↓</span>
+                    </label>
+                    @foreach($friends as $friend)
+                    <div>
+                        <input type="radio" name="selected_friend_name" value="{{ $friend->name }}" class="mr-2">
+                        <span>{{ $friend->name }}</span>
+                    </div>
+                    @endforeach
+                </div>
+                
             </div>
 
             <button type="submit" class="btn btn-outline" style="background-color: #FF6699; color: white; font-size: 1.2rem;">更新</button>
@@ -58,6 +81,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+        
+            $('#status').change(function() {
+                if ($(this).val() === 'limited') {
+                    $('#limited_input').show();
+                } else {
+                    $('#limited_input').hide();
+                }
+            });
+        
             $('#myImage').on('change', function (e) {
                 var reader = new FileReader();
                 reader.onload = function (e) {

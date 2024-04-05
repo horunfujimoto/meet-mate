@@ -146,6 +146,8 @@ class PostsController extends Controller
         // MatchUser の ID を使って名前を取得
         $match_user = MatchUser::findOrFail($match_user_id);
         
+        $friends = auth()->user()->myfriends;
+        
         if (\Auth::id() === $post->user_id) {
             // ビューにデータを渡す
             return view('posts.edit', [
@@ -153,6 +155,7 @@ class PostsController extends Controller
                 'user' => $user,
                 'match_user' => $match_user,
                 'match_users' => $match_users, // $match_users を追加
+                'friends' => $friends,
             ]);
         }
          // 前のURLへリダイレクトさせる
@@ -172,6 +175,8 @@ class PostsController extends Controller
             $post->place = $request->place;
             $post->body = $request->body;
             $post->match_user_id = $request->match_user_id;
+            $post->status = $request->status; // 公開ステータス
+            $post->selected_friend_name = $request->selected_friend_name;
             
             // 画像の保存
             if ($request->hasFile('image')) {
