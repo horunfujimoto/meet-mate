@@ -88,10 +88,13 @@ class MatchUsersController extends Controller
     {
         // idを検索して取得
         $match_user = MatchUser::findOrFail($id);
+        $ways = Way::all();
         
         if (\Auth::id() === $match_user->user_id) {
             return view('match_users.edit', [
                 'match_user' => $match_user,
+                'ways' => $ways,
+                'selectedWay' => $match_user->way_id, // 編集するユーザーの選択された出会い方のIDを渡す
             ]);
         }
          // 前のURLへリダイレクトさせる
@@ -110,8 +113,8 @@ class MatchUsersController extends Controller
             $match_user->work = $request->work;
             $match_user->birthday = $request->birthday;
             $match_user->sns = $request->sns;
-            $match_user->way = $request->way;
             $match_user->others = $request->others;
+            $match_user->way_id = $request->way_id;
             
             // 画像の保存
             if ($request->hasFile('image')) {

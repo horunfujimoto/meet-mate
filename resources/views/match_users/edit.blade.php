@@ -30,22 +30,30 @@
                 <label for="birthday" class="label">
                     <span class="label-text">誕生日:</span>
                 </label>
-                <input type="date" name="birthday" value="{{ $match_user->birthday }}" class="input input-bordered w-full" required>
+                <input type="date" name="birthday" value="{{ $match_user->birthday }}" class="input input-bordered w-full">
                 
                 <label for="sns" class="label">
                     <span class="label-text">SNS:</span>
                 </label>
-                <input type="text" name="sns" value="{{ $match_user->sns }}" class="input input-bordered w-full" required>
+                <input type="text" name="sns" value="{{ $match_user->sns }}" class="input input-bordered w-full">
                 
                 <label for="way" class="label">
                     <span class="label-text">出会い方:</span>
                 </label>
-                <input type="text" name="way" value="{{ $match_user->way }}" class="input input-bordered w-full" required>
+
+                <select id="way" name="way_id" class="form-control">
+                    @foreach($ways as $way)
+                        <option value="{{ $way->id }}" {{ $way->id == $selectedWay ? 'selected' : '' }}>
+                            {{ $way->way }}
+                        </option>
+                    @endforeach
+                </select>
+
                 
                 <label for="others" class="label">
                     <span class="label-text">その他情報:</span>
                 </label>
-                <input type="text" name="others" value="{{ $match_user->others }}" class="input input-bordered w-full" required>
+                <input type="text" name="others" value="{{ $match_user->others }}" class="input input-bordered w-full">
                 
                 <label for="image" class="label">
                     <span class="label-text">プロフィール画像(変更前):</span>
