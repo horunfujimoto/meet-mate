@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('match_users', MatchUsersController::class);
     Route::resource('posts', PostsController::class);
     Route::resource('myfriends', FriendsController::class, ['only' => ['index']]);
+    Route::get('myposts', [PostsController::class, 'myposts'])->name('myposts');
+    Route::get('private_myposts', [PostsController::class, 'private_myposts'])->name('private_myposts');
     
     Route::group(['prefix' => 'users/{id}'], function () {
         Route::post('friend', [FriendsController::class, 'store'])->name('user.friend');
