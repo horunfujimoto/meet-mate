@@ -36,15 +36,22 @@
                 </label>
                 <input type="text" name="sns" class="input input-bordered w-full">
                 
-                <label for="way" class="label">
+                <label for="way_id" class="label">
                     <span class="label-text">出会い方:</span>
                 </label>
-   
-                <select id="way" name="way_id" class="form-control">
+                <select id="way_id" name="way_id" class="form-control">
                     @foreach($ways as $way)
                         <option value="{{ $way->id }}">{{ $way->way }}</option>
                     @endforeach
                 </select>
+
+                <!-- その他の出会い方の追加入力フィールド -->
+                <div id="other_way_input" style="display: none;">
+                    <label for="other_way" class="label">
+                        <span class="label-text">その他の出会い方を入力してください↓</span>
+                    </label>
+                    <input type="text" name="other_way" class="input input-bordered w-full">
+                </div>
                                 
                 <label for="others" class="label">
                     <span class="label-text">その他情報:</span>
@@ -64,17 +71,24 @@
         </form>
     </div>
     
-    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            $('#way_id').change(function() {
+                if ($(this).val() === '1') {
+                    $('#other_way_input').show();
+                } else {
+                    $('#other_way_input').hide();
+                }
+            });
+            
             $('#myImage').on('change', function (e) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     $("#preview").attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files[0]);
-           });
+            });
         }); 
     </script>
     
