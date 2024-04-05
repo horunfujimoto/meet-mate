@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $ways = [
-            ['way' => 'ほかの出会い方を登録する'],
+            ['way' => '★ほかの出会い方を登録する'],
             ['way' => '職場'],
             ['way' => '学校'],
             ['way' => 'バイト'],

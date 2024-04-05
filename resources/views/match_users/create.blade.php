@@ -41,7 +41,7 @@
                 </label>
                 <select id="way_id" name="way_id" class="form-control">
                     @foreach($ways as $way)
-                        <option value="{{ $way->id }}">{{ $way->way }}</option>
+                        <option value="{{ $way->id }}" {{ $way->id == 2 ? 'selected' : '' }}>{{ $way->way }}</option>
                     @endforeach
                 </select>
 
