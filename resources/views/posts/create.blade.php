@@ -65,7 +65,7 @@
                     </label>
                     @foreach($friends as $friend)
                     <div>
-                        <input type="radio" name="limited" value="{{ $friend->id }}" class="mr-2">
+                        <input type="radio" name="selected_friend_name" value="{{ $friend->name }}" class="mr-2">
                         <span>{{ $friend->name }}</span>
                     </div>
                     @endforeach

@@ -68,7 +68,7 @@ class PostsController extends Controller
         $user_id = Auth::id();
         
         $post = new Post;
-
+        
         $post->title = $request->title;
         $post->date_day = $request->date_day;
         $post->place = $request->place;
@@ -77,6 +77,7 @@ class PostsController extends Controller
         $post->user_id = $user_id;
         $post->match_user_id = $request->match_user_id;
         $post->status = $request->status; // 公開ステータス
+        $post->selected_friend_name = $request->selected_friend_name;
         
         // 画像の保存
         if ($request->hasFile('image')) {

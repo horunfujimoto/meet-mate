@@ -7,6 +7,9 @@
             <div class="col-auto">
                 <h2 class="title">{{ $post->title }}の詳細ページ</h2>
                 <h4 class="status">{{ $post->status }}</h4>
+                @if ($post->status === 'limited')
+                    <p>選択された友達: {{ $post->selected_friend_name }}</p>
+                @endif
             </div>
         </div>
         
