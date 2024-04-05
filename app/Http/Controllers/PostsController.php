@@ -51,11 +51,13 @@ class PostsController extends Controller
         $match_users = MatchUser::where('user_id', auth()->id())->get();
         
         $post = new Post;
+        $friends = auth()->user()->myfriends;
     
         // 作成ビューを表示
         return view('posts.create', [
             'match_users' => $match_users,
             'post' => $post,
+            'friends' => $friends,
         ]);
     }
 
@@ -74,6 +76,7 @@ class PostsController extends Controller
         $post->image = $request->image;
         $post->user_id = $user_id;
         $post->match_user_id = $request->match_user_id;
+        $post->status = $request->status; // 公開ステータス
         
         // 画像の保存
         if ($request->hasFile('image')) {

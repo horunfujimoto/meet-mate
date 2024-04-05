@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('place', 20);
             $table->string('image')->nullable();
             $table->string('body');
+            $table->enum('status', ['public', 'private', 'limited'])->default('public');
             $table->timestamps();
 
             // 外部キー制約を追加
