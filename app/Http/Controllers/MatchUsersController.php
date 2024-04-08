@@ -28,8 +28,9 @@ class MatchUsersController extends Controller
     public function create()
     {
         $match_user = new MatchUser;
-        // Wayモデルからデータを取得し、$waysに代入
-        $ways = Way::all();
+
+        // Wayモデルからidが1以上11以下のデータを取得し、$waysに代入(seederの内容のみ)
+        $ways = Way::where('id', '>=', 1)->where('id', '<=', 11)->get();
     
         // 作成ビューを表示
         return view('match_users.create', [
@@ -102,13 +103,18 @@ class MatchUsersController extends Controller
     {
         // idを検索して取得
         $match_user = MatchUser::findOrFail($id);
-        $ways = Way::all();
+        
+        // Wayモデルからidが1以上11以下のデータを取得し、$waysに代入(seederの内容のみ)
+        $ways = Way::where('id', '>=', 1)->where('id', '<=', 11)->get();
+        
+        // $match_userに紐づく出会い方の名前を取得する
+        $selectedWay = $match_user->way_id > 11 ? Way::findOrFail($match_user->way_id)->way : $match_user->way_id;
         
         if (\Auth::id() === $match_user->user_id) {
             return view('match_users.edit', [
                 'match_user' => $match_user,
                 'ways' => $ways,
-                'selectedWay' => $match_user->way_id, // 編集するユーザーの選択された出会い方のIDを渡す
+                'selectedWay' => $selectedWay, // 編集するユーザーの選択された出会い方のIDを渡す
             ]);
         }
          // 前のURLへリダイレクトさせる

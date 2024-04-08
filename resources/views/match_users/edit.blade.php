@@ -47,11 +47,11 @@
                 </select>
 
                 <!-- その他の出会い方の追加入力フィールド -->
-                <div id="other_way_input" style="{{ $match_user->way_id == 1 ? 'display: block;' : 'display: none;' }}">
+                <div id="other_way_input" style="{{ $match_user->way_id > 11 ? 'display: block;' : 'display: none;' }}">
                     <label for="other_way" class="label">
                         <span class="label-text"><span style="color:red;">＊</span>その他の出会い方を入力してください↓</span>
                     </label>
-                    <input type="text" name="other_way" class="input input-bordered w-full" value="{{ $match_user->way_id == 11 ? $match_user->way->way : '' }}">
+                    <input type="text" name="other_way" class="input input-bordered w-full" value="{{ $match_user->way_id > 11 ? $selectedWay : '' }}">
                 </div>
                 
                 <label for="others" class="label">
