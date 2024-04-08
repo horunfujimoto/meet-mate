@@ -12,7 +12,12 @@
         <div class="row m-2">
             <div class="col-md-4">
                 <div class="mt-4">
-                    <img src="/images/{{ $match_user->image }}" alt="{{ $match_user->name }}" class="img-fluid" width="200">
+                    @if($match_user->image)
+                        <img src="/images/{{ $match_user->image }}" alt="{{ $match_user->name }}" class="img-fluid" width="200">
+                    @else
+                        <img src="/images/no_image.png" alt="No Image" class="img-fluid" width="200">
+                    @endif
+                    
                 </div>
             </div>
             

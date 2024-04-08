@@ -41,11 +41,18 @@
                     <span class="label-text"><span style="color:red;">＊</span>内容:</span>
                 </label>
                 <input type="text" name="body" value="{{ $post->body }}" class="input input-bordered w-full" required>
-                
+            
                 <label for="image" class="label">
-                    <span class="label-text"デート写真(変更前):</span>
+                    <span class="label-text">デート写真(変更前):</span>
                 </label>
-                <img src="/images/{{ $post->image }}" alt="{{ $post->name }}" width="100">
+                <div class="m-2">
+                    @if($post->image)
+                        <img src="/images/{{ $post->image }}" alt="{{ $post->name }}" width="100">
+                    @else
+                        <img src="/images/no_image.png" alt="No Image" width="100">
+                    @endif
+                </div>
+                
                 <input type="file" name="image" class="input input-bordered w-full" id="myImage" accept="image/*">
                 <img id="preview" src="#" alt="プレビュー画像" width="200px" height="auto">
                 

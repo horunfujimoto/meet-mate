@@ -16,7 +16,11 @@
         <div class="row m-2">
             <div class="col-md-4">
                 <div class="mt-4">
-                    <img src="/images/{{ $post->image }}" alt="{{ $post->name }}" class="img-fluid" width="200">
+                    @if($post->image)
+                        <img src="/images/{{ $post->image }}" alt="{{ $post->name }}" class="img-fluid" width="200">
+                    @else
+                        <img src="/images/no_image.png" alt="No Image" width="200">
+                    @endif
                 </div>
             </div>
             

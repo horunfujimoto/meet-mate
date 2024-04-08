@@ -30,8 +30,13 @@
                                 @endforeach
                             </td>
                             <td class="border border-gray-300 px-4 py-2">
-                                <img src="/images/{{ $match_user->image }}" alt="{{ $match_user->name }}" width="50" height="auto">
+                                @if($match_user->image)
+                                    <img src="/images/{{ $match_user->image }}" alt="{{ $match_user->name }}" width="50" height="auto">
+                                @else
+                                    <img src="/images/no_image.png" alt="No Image" width="50" height="auto">
+                                @endif
                             </td>
+
                         </tr>
                         @endforeach
                     </tbody>

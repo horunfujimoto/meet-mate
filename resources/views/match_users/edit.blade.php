@@ -62,7 +62,14 @@
                 <label for="image" class="label">
                     <span class="label-text">プロフィール画像(変更前):</span>
                 </label>
-                <img src="/images/{{ $match_user->image }}" alt="{{ $match_user->name }}" width="100">
+                <div class="m-2">
+                    @if($match_user->image)
+                        <img src="/images/{{ $match_user->image }}" alt="{{ $match_user->name }}" width="100">
+                    @else
+                        <img src="/images/no_image.png" alt="No Image" width="100">
+                    @endif
+                </div>
+                
                 <input type="file" name="image" class="input input-bordered w-full mt-3" id="myImage" accept="image/*">
                 <img id="preview" src="#" alt="プレビュー画像" width="200px" height="auto">
             </div>
