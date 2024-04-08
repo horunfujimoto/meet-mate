@@ -6,7 +6,7 @@
                 <th class="border border-gray-300 px-4 py-2">タイトル</th>
                 <th class="border border-gray-300 px-4 py-2">会った日</th>
                 <th class="border border-gray-300 px-4 py-2">会った方</th>
-                <th class="border border-gray-300 px-4 py-2">公開ステータス</th>
+                <th class="border border-gray-300 px-4 py-2">公開設定</th>
             </tr>
         </thead>
         <tbody>

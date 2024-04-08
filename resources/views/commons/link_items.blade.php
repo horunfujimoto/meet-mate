@@ -10,10 +10,10 @@
                         <a class="link" href="{{ route('users.index') }}">ユーザー関連</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="link" href="{{ route('match_users.index') }}">出会った方一覧</a>
+                        <a class="link" href="{{ route('match_users.index') }}">出会った方</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="link" href="{{ route('posts.index') }}">みんなの投稿一覧</a>
+                        <a class="link" href="{{ route('posts.index') }}">投稿関連</a>
                     </li>
                     {{-- ログアウトへのリンク --}}
                     <li class="list-inline-item mx-2">

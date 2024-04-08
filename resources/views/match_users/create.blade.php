@@ -49,9 +49,9 @@
                 <!-- その他の出会い方の追加入力フィールド -->
                 <div id="other_way_input" style="display: none;">
                     <label for="other_way" class="label">
-                        <span class="label-text"><span style="color:red;">＊</span>その他の出会い方を入力してください↓</span>
+                        <span class="label-text"><span style="color:red;">＊</span>ほかの出会い方を入力してください↓</span>
                     </label>
-                    <input type="text" name="other_way" class="input input-bordered w-full">
+                    <input type="text" name="other_way" class="input input-bordered w-full input-small">
                 </div>
                                 
                 <label for="others" class="label">
