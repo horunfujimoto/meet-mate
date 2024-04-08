@@ -16,12 +16,9 @@
                         <a class="link" href="{{ route('posts.index') }}">みんなの投稿一覧</a>
                     </li>
                     {{-- ログアウトへのリンク --}}
-                    <li class="nav-item mx-2">
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <a class="link" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a>
-                        </form>
-                    </li>
+                    <li class="list-inline-item mx-2">
+                        <a class="link" href="#" onclick="event.preventDefault();this.closest('form').submit();">ログアウト</a>
+                    </li> 
                 @else
                     {{-- ユーザ登録ページへのリンク --}}
                     <li class="nav-item mx-2">
