@@ -88,25 +88,30 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-        
-            $('#status').change(function() {
-                if ($(this).val() === 'limited') {
-                    $('#limited_input').show();
-                } else {
-                    $('#limited_input').hide();
-                }
-            });
-            
+            // 公開ステータスが変更されたときの処理
             $('#status').change(function() {
                 if ($(this).val() === 'limited') {
                     $('#limited_input').show();
                     $('input[name="selected_friend_ids[]"]').prop('required', true); // 限定公開が選択されたらチェックボックスを必須にする
                 } else {
                     $('#limited_input').hide();
-                    $('input[name="selected_friend_ids[]"]').prop('required', false); // 限定公開以外が選択されたらチェックボックスの必須を解除する
+                    // 限定公開以外が選択された場合は全チェックボックスの required 属性を削除する
+                    $('input[name="selected_friend_ids[]"]').removeAttr('required');
                 }
             });
-        
+    
+            // チェックボックスの状態変化時の処理
+            $('input[name="selected_friend_ids[]"]').on('change', () => {
+                // チェック済みチェックボックス数をカウント
+                const isCheckedCount = $('input[name="selected_friend_ids[]"]:checked').length;
+    
+                // カウントが1以上の場合は全チェックボックスの required 属性を削除する
+                isCheckedCount > 0
+                    ? $('input[name="selected_friend_ids[]"]').removeAttr('required')
+                    : $('input[name="selected_friend_ids[]"]').prop('required', true);
+            });
+    
+            // 画像のプレビュー表示
             $('#myImage').on('change', function (e) {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();
@@ -118,7 +123,7 @@
                     $('#preview').attr('src', '#').attr('hidden', 'hidden');
                 }
             });
-        }); 
+        });
     </script>
     
 @endsection
