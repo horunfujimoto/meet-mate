@@ -113,7 +113,7 @@ class PostsController extends Controller
         $user = $post->user;
         
         // アクセス制限を追加
-        if ($post->status === 'public') {
+        if ($post->status === '公開') {
             // 公開投稿の場合は、投稿者と投稿者の友達のみ表示
             if (Auth::id() === $user->id || $user->myfriends->contains(Auth::id())) {
                 // 投稿に関連付けられた MatchUser の ID を取得
@@ -133,7 +133,7 @@ class PostsController extends Controller
                     'comments' => $comments, // コメント一覧を渡す
                 ]);
             }
-        } elseif ($post->status === 'private') {
+        } elseif ($post->status === '非公開') {
             // 非公開投稿の場合は、投稿者のみ表示
             if (Auth::id() === $user->id) {
                 // 投稿に関連付けられた MatchUser の ID を取得
@@ -153,7 +153,7 @@ class PostsController extends Controller
                     'comments' => $comments, // コメント一覧を渡す
                 ]);
             }
-        } elseif ($post->status === 'limited') {
+        } elseif ($post->status === '限定公開') {
             // 限定公開投稿の場合は、投稿者と特定の友達のみ表示
             if (Auth::id() === $user->id || $post->selected_friend_name === auth()->user()->name) {
                 // 投稿に関連付けられた MatchUser の ID を取得
@@ -261,7 +261,7 @@ class PostsController extends Controller
             // 削除
             $post->delete();
             // 一覧ページ
-            return redirect()->route('posts.index');
+            return redirect()->route('myposts');
         }
         
          // 前のURLへリダイレクトさせる

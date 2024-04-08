@@ -40,4 +40,18 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    
+    /**
+     * 公開ステータスの日本語化
+     */
+    public function getStatusAttribute($value)
+    {
+        $statuses = [
+            'public' => '公開',
+            'private' => '非公開',
+            'limited' => '限定公開',
+        ];
+
+        return $statuses[$value] ?? $value;
+    }
 }
