@@ -13,32 +13,32 @@
 
             <div class="form-control my-4">
                 <label for="name" class="label">
-                    <span class="label-text">名前:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>名前:</span>
                 </label>
                 <input type="text" name="name" value="{{ $match_user->name }}" class="input input-bordered w-full" required>
                 
                 <label for="address" class="label">
-                    <span class="label-text">住んでる場所:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>住んでる場所:</span>
                 </label>
                 <input type="text" name="address" value="{{ $match_user->address }}" class="input input-bordered w-full" required>
                 
                 <label for="work" class="label">
-                    <span class="label-text">職業:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>職業:</span>
                 </label>
                 <input type="text" name="work" value="{{ $match_user->work }}" class="input input-bordered w-full" required>
                 
                 <label for="birthday" class="label">
-                    <span class="label-text">誕生日:</span>
+                    <span class="label-text">誕生日(任意):</span>
                 </label>
                 <input type="date" name="birthday" value="{{ $match_user->birthday }}" class="input input-bordered w-full">
                 
                 <label for="sns" class="label">
-                    <span class="label-text">SNS:</span>
+                    <span class="label-text">SNS(任意):</span>
                 </label>
                 <input type="text" name="sns" value="{{ $match_user->sns }}" class="input input-bordered w-full">
                 
                 <label for="way_id" class="label">
-                    <span class="label-text">出会い方:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>出会い方:</span>
                 </label>
                 <select id="way_id" name="way_id" class="form-control">
                     @foreach($ways as $way)
@@ -49,13 +49,13 @@
                 <!-- その他の出会い方の追加入力フィールド -->
                 <div id="other_way_input" style="{{ $match_user->way_id == 1 ? 'display: block;' : 'display: none;' }}">
                     <label for="other_way" class="label">
-                        <span class="label-text">その他の出会い方を入力してください↓</span>
+                        <span class="label-text"><span style="color:red;">＊</span>その他の出会い方を入力してください↓</span>
                     </label>
                     <input type="text" name="other_way" class="input input-bordered w-full" value="{{ $match_user->way_id == 11 ? $match_user->way->way : '' }}">
                 </div>
                 
                 <label for="others" class="label">
-                    <span class="label-text">その他情報:</span>
+                    <span class="label-text">その他情報(任意):</span>
                 </label>
                 <input type="text" name="others" value="{{ $match_user->others }}" class="input input-bordered w-full">
                 

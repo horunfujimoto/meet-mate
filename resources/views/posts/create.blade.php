@@ -13,7 +13,7 @@
             <div class="form-control my-4">
                 
                 <label for="match_user_id" class="label">
-                    <span class="label-text">会った方:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>会った方:</span>
                 </label>
                 <select name="match_user_id" class="input input-bordered w-full">
                     @foreach($match_users as $match_user)
@@ -22,35 +22,36 @@
                 </select>
                 
                 <label for="title" class="label">
-                    <span class="label-text">タイトル:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>タイトル:</span>
                 </label>
                 <input type="text" name="title" class="input input-bordered w-full" required>
                 
                 <label for="date_day" class="label">
-                    <span class="label-text">会った日:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>会った日:</span>
                 </label>
                 <input type="date" name="date_day" class="input input-bordered w-full" required>
                 
                 <label for="place" class="label">
-                    <span class="label-text">会った場所:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>会った場所:</span>
                 </label>
                 <input type="text" name="place" class="input input-bordered w-full" required>
                 
                 <label for="body" class="label">
-                    <span class="label-text">内容:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>内容:</span>
                 </label>
                 <input type="text" name="body" class="input input-bordered w-full" required>
                 
                 <label for="image" class="label">
-                    <span class="label-text">デート写真:</span>
+                    <span class="label-text">デート写真(任意):</span>
                 </label>
                 
-                <input type="file" name="image" class="input input-bordered w-full" required id="myImage" accept="image/*">
+                <input type="file" name="image" class="input input-bordered w-full" id="myImage" accept="image/*">
                 <img id="preview" src="#" alt="プレビュー画像" width="200px" height="auto">
+
                 
                 <!-- ここに公開ステータスを選ぶ記述 -->
                 <label for="status" class="label">
-                    <span class="label-text">公開ステータス:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>公開ステータス:</span>
                 </label>
                 <select id="status" name="status" class="form-control">
                     <option value="public">公開</option>
@@ -61,7 +62,7 @@
                 <!-- 限定公開選択フィールド -->
                 <div id="limited_input" style="display: none;">
                     <label for="limited" class="label">
-                        <span class="label-text">公開する友達を選択してください↓</span>
+                        <span class="label-text"><span style="color:red;">＊</span>公開する友達を選択してください↓</span>
                     </label>
                     @foreach($friends as $friend)
                     <div>

@@ -12,32 +12,33 @@
 
             <div class="form-control my-4">
                 <label for="name" class="label">
-                    <span class="label-text">名前:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>名前:</span>
+
                 </label>
                 <input type="text" name="name" class="input input-bordered w-full" required>
                 
                 <label for="address" class="label">
-                    <span class="label-text">住んでる場所:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>住んでる場所:</span>
                 </label>
                 <input type="text" name="address" class="input input-bordered w-full" required>
                 
                 <label for="work" class="label">
-                    <span class="label-text">職業:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>職業:</span>
                 </label>
                 <input type="text" name="work" class="input input-bordered w-full" required>
                 
                 <label for="birthday" class="label">
-                    <span class="label-text">誕生日:</span>
+                    <span class="label-text">誕生日(任意):</span>
                 </label>
                 <input type="date" name="birthday" class="input input-bordered w-full">
                 
                 <label for="sns" class="label">
-                    <span class="label-text">SNS:</span>
+                    <span class="label-text">SNS(任意):</span>
                 </label>
                 <input type="text" name="sns" class="input input-bordered w-full">
                 
                 <label for="way_id" class="label">
-                    <span class="label-text">出会い方:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>出会い方:</span>
                 </label>
                 <select id="way_id" name="way_id" class="form-control">
                     @foreach($ways as $way)
@@ -48,21 +49,21 @@
                 <!-- その他の出会い方の追加入力フィールド -->
                 <div id="other_way_input" style="display: none;">
                     <label for="other_way" class="label">
-                        <span class="label-text">その他の出会い方を入力してください↓</span>
+                        <span class="label-text"><span style="color:red;">＊</span>その他の出会い方を入力してください↓</span>
                     </label>
                     <input type="text" name="other_way" class="input input-bordered w-full">
                 </div>
                                 
                 <label for="others" class="label">
-                    <span class="label-text">その他情報:</span>
+                    <span class="label-text">その他情報(任意):</span>
                 </label>
                 <input type="text" name="others" class="input input-bordered w-full">
                 
                 <label for="image" class="label">
-                    <span class="label-text">プロフィール画像:</span>
+                    <span class="label-text"><span style="color:red;"></span>プロフィール画像(任意):</span>
                 </label>
 
-                <input type="file" name="image" class="input input-bordered w-full" required id="myImage" accept="image/*">
+                <input type="file" name="image" class="input input-bordered w-full" id="myImage" accept="image/*">
                 <img id="preview" src="#" alt="プレビュー画像" width="200px" height="auto">
                 
             </div>
