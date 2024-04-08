@@ -5,10 +5,9 @@
         
         <div class="row justify-content-between align-items-center mb-3">
             <div class="col-auto">
-                <h2 class="title">{{ $post->title }}の詳細ページ</h2>
-                <h4 class="status">{{ $post->status }}</h4>
-                @if ($post->status === 'limited')
-                    <p>公開する友達: {{ $post->selected_friend_name }}</p>
+                <h2 class="title">{{ $post->title }}の詳細ページ({{ $post->status }})</h2>
+                @if ($post->status === '限定公開')
+                    <p>閲覧可能な友達: {{ $post->selected_friend_name }}</p>
                 @endif
             </div>
         </div>
