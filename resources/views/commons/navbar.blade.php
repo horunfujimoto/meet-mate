@@ -2,7 +2,7 @@
     <nav class="navbar" style="background-color: #FF6699; font-size: 1.2rem;">
         {{-- トップページへのリンク --}}
         <div class="d-flex align-items-center">
-            <h1 class="font-weight-bold"><a class="link" href="/posts">meet♥mate</a></h1>
+            <h1 class="font-weight-bold"><a class="link m-3" href="/posts">meet♥mate</a></h1>
         </div>
         {{-- その他リンク --}}
         <div class="d-flex align-items-center">

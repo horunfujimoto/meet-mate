@@ -41,3 +41,18 @@
 /*.nav-tabs {*/
 /*    border-bottom: 2px solid #FF6699 !important;*/
 /*}*/
+
+
+/*nabbarのlink表示*/
+/*.navbar-light .navbar-toggler {*/
+/*    border-color: white!important;*/
+/*    background-color: transparent !important;*/
+/*}*/
+
+/*.navbar-icon{*/
+/*    color: white !important;*/
+/*}*/
+
+/*.navbar-toggler:focus {*/
+/*    box-shadow: none !important;*/
+/*}*/
