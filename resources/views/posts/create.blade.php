@@ -90,6 +90,16 @@
                     $('#limited_input').hide();
                 }
             });
+            
+            $('#status').change(function() {
+                if ($(this).val() === 'limited') {
+                    $('#limited_input').show();
+                    $('input[name="selected_friend_ids[]"]').prop('required', true); // 限定公開が選択されたらチェックボックスを必須にする
+                } else {
+                    $('#limited_input').hide();
+                    $('input[name="selected_friend_ids[]"]').prop('required', false); // 限定公開以外が選択されたらチェックボックスの必須を解除する
+                }
+            });
         
             $('#myImage').on('change', function (e) {
                 if (this.files && this.files[0]) {

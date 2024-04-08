@@ -83,6 +83,16 @@
                 }
             });
             
+            $('#way_id').change(function() {
+                if ($(this).val() === '1') {
+                    $('#other_way_input').show();
+                    $('input[name="other_way"]').prop('required', true); // 出会い方が1の場合、入力フィールドを必須にする
+                } else {
+                    $('#other_way_input').hide();
+                    $('input[name="other_way"]').prop('required', false); // 出会い方が1以外の場合、入力フィールドの必須属性を解除する
+                }
+            });
+            
             $('#myImage').on('change', function (e) {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();
