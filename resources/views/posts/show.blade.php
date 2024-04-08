@@ -7,7 +7,7 @@
             <div class="col-auto">
                 <h2 class="title">{{ $post->title }}の詳細ページ({{ $post->status }})</h2>
                 @if ($post->status === '限定公開')
-                    <p>閲覧可能な友達: {{ $post->selected_friend_name }}</p>
+                    <p>閲覧可能な友達: {{ $post->selected_friend_ids }}</p>
                 @endif
             </div>
         </div>

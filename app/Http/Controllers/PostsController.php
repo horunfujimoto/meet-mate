@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class PostsController extends Controller
 {
     
-    public function index(Request $request)
+   public function index(Request $request)
     {
         if (\Auth::check()) {
             
@@ -26,7 +26,7 @@ class PostsController extends Controller
                     $q->where('status', 'public')
                         ->orWhere(function ($q) {
                             $q->where('status', 'limited')
-                                ->where('selected_friend_name', auth()->user()->name);
+                                ->where('selected_friend_ids', 'like', '%' . auth()->user()->name . '%');
                         });
                 })
                 ->orderBy('id', 'desc');
@@ -87,7 +87,7 @@ class PostsController extends Controller
         $post->user_id = $user_id;
         $post->match_user_id = $request->match_user_id;
         $post->status = $request->status; // 公開ステータス
-        $post->selected_friend_name = $request->selected_friend_name;
+        $post->selected_friend_ids = is_array($request->selected_friend_ids) ? implode(',', $request->selected_friend_ids) : $request->selected_friend_ids;
         
         // 画像の保存
         if ($request->hasFile('image')) {
@@ -155,7 +155,7 @@ class PostsController extends Controller
             }
         } elseif ($post->status === '限定公開') {
             // 限定公開投稿の場合は、投稿者と特定の友達のみ表示
-            if (Auth::id() === $user->id || $post->selected_friend_name === auth()->user()->name) {
+             if (Auth::id() === $user->id || in_array(auth()->user()->name, explode(',', $post->selected_friend_ids))) {
                 // 投稿に関連付けられた MatchUser の ID を取得
                 $match_user_id = $post->match_user_id;
             
@@ -228,7 +228,7 @@ class PostsController extends Controller
             $post->body = $request->body;
             $post->match_user_id = $request->match_user_id;
             $post->status = $request->status; // 公開ステータス
-            $post->selected_friend_name = $request->selected_friend_name;
+            $post->selected_friend_ids = is_array($request->selected_friend_ids) ? implode(',', $request->selected_friend_ids) : $request->selected_friend_ids;
             
             // 画像の保存
             if ($request->hasFile('image')) {

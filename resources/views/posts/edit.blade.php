@@ -73,7 +73,7 @@
                     </label>
                     @foreach($friends as $friend)
                     <div>
-                        <input type="radio" name="selected_friend_name" value="{{ $friend->name }}" class="mr-2">
+                        <input type="checkbox" name="selected_friend_ids[]" value="{{ $friend->name }}" class="mr-2">
                         <span>{{ $friend->name }}</span>
                     </div>
                     @endforeach

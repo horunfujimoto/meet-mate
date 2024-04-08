@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('body');
             $table->enum('status', ['public', 'private', 'limited'])->default('public');
-            $table->string('selected_friend_name')->nullable();
+            $table->string('selected_friend_ids')->nullable()->after('status');
             $table->timestamps();
 
             // 外部キー制約を追加
