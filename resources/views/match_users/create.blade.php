@@ -64,7 +64,7 @@
                 </label>
 
                 <input type="file" name="image" class="input input-bordered w-full" id="myImage" accept="image/*">
-                <img id="preview" src="#" alt="プレビュー画像" width="200px" height="auto">
+                <img id="preview" src="#" alt="プレビュー画像" width="200px" height="auto" hidden>
                 
             </div>
 
@@ -84,11 +84,15 @@
             });
             
             $('#myImage').on('change', function (e) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $("#preview").attr('src', e.target.result);
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#preview').attr('src', e.target.result).removeAttr('hidden');
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    $('#preview').attr('src', '#').attr('hidden', 'hidden');
                 }
-                reader.readAsDataURL(e.target.files[0]);
             });
         }); 
     </script>
