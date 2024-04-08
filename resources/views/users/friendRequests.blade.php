@@ -3,7 +3,7 @@
 @section('content')
 <div class="mx-auto">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="title">ユーザー関連</h2>
+        <h2 class="title">友達受付中</h2>
     </div>
     <div class="row mt-4">
         <div class="py-2">
