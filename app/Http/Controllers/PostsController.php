@@ -11,48 +11,49 @@ class PostsController extends Controller
 {
     
     public function index(Request $request)
-{
-    if (\Auth::check()) {
-        
-        $user = auth()->user(); // ログイン中のユーザーを取得
-        
-        $friendIds = $user->myfriends()->pluck('users.id')->toArray();
-        $friendIds[] = $user->id; // 自分自身のIDも追加
-
-        $query = Post::query()
-            ->whereIn('posts.user_id', $friendIds)
-            ->where(function ($q) {
-                $q->where('status', 'public')
-                    ->orWhere(function ($q) {
-                        $q->where('status', 'limited')
-                            ->where('selected_friend_name', auth()->user()->name);
-                    });
-            })
-            ->orderBy('posts.id', 'desc');
-
-        // キーワードが指定されていれば、タイトルで部分一致検索を行う
-        if ($request->has('keyword') && !empty($request->keyword)) {
-            $keyword = $request->keyword;
-            $query->where('title', 'like', "%$keyword%");
+    {
+        if (\Auth::check()) {
+            
+            $user = auth()->user(); // ログイン中のユーザーを取得
+            
+            // 友達のIDを取得
+            $friendIds = $user->myfriends()->pluck('users.id')->toArray();
+    
+            // 友達の投稿のみを取得するクエリを作成
+            $query = Post::query()
+                ->whereIn('user_id', $friendIds)
+                ->where(function ($q) {
+                    $q->where('status', 'public')
+                        ->orWhere(function ($q) {
+                            $q->where('status', 'limited')
+                                ->where('selected_friend_name', auth()->user()->name);
+                        });
+                })
+                ->orderBy('id', 'desc');
+    
+            // キーワードが指定されていれば、タイトルで部分一致検索を行う
+            if ($request->has('keyword') && !empty($request->keyword)) {
+                $keyword = $request->keyword;
+                $query->where('title', 'like', "%$keyword%");
+            }
+    
+            $posts = $query->paginate(10);
+    
+            foreach ($posts as $post) {
+                $match_user = MatchUser::find($post->match_user_id);
+                // $match_userに直接名前を代入する
+                $post->match_user_name = $match_user->name;
+            }
+    
+            return view('posts.index', [
+                'posts' => $posts,
+                'keyword' => $request->keyword ?? '', // ビューにキーワードを渡す
+            ]);
         }
-
-        $posts = $query->paginate(10);
-
-        foreach ($posts as $post) {
-            $match_user = MatchUser::find($post->match_user_id);
-            // $match_userがnullでないことを前提として、直接名前を代入する
-            $post->match_user_name = $match_user->name;
-        }
-
-        return view('posts.index', [
-            'posts' => $posts,
-            'keyword' => $request->keyword ?? '', // ビューにキーワードを渡す
-        ]);
+    
+        // 前のURLへリダイレクトさせる
+        return back()->with('Delete Failed');
     }
-
-    // 前のURLへリダイレクトさせる
-    return back()->with('Delete Failed');
-}
 
 
 
