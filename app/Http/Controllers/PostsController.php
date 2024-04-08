@@ -56,7 +56,6 @@ class PostsController extends Controller
     }
 
 
-
     public function create()
     {
         $match_users = MatchUser::where('user_id', auth()->id())->get();
@@ -104,6 +103,7 @@ class PostsController extends Controller
         return redirect()->route('posts.show', $post->id);
     }
 
+
     public function show($id)
     {
         // 投稿を取得
@@ -112,23 +112,73 @@ class PostsController extends Controller
         // 投稿者の情報を取得
         $user = $post->user;
         
-        // 投稿に関連付けられた MatchUser の ID を取得
-        $match_user_id = $post->match_user_id;
-    
-        // MatchUser の ID を使って名前を取得
-        $match_user = MatchUser::findOrFail($match_user_id);
+        // アクセス制限を追加
+        if ($post->status === 'public') {
+            // 公開投稿の場合は、投稿者と投稿者の友達のみ表示
+            if (Auth::id() === $user->id || $user->myfriends->contains(Auth::id())) {
+                // 投稿に関連付けられた MatchUser の ID を取得
+                $match_user_id = $post->match_user_id;
+            
+                // MatchUser の ID を使って名前を取得
+                $match_user = MatchUser::findOrFail($match_user_id);
+                
+                // 投稿に紐づくコメント一覧を取得
+                $comments = $post->comments()->get();
+                
+                // ビューにデータを渡す
+                return view('posts.show', [
+                    'post' => $post,
+                    'user' => $user,
+                    'match_user' => $match_user,
+                    'comments' => $comments, // コメント一覧を渡す
+                ]);
+            }
+        } elseif ($post->status === 'private') {
+            // 非公開投稿の場合は、投稿者のみ表示
+            if (Auth::id() === $user->id) {
+                // 投稿に関連付けられた MatchUser の ID を取得
+                $match_user_id = $post->match_user_id;
+            
+                // MatchUser の ID を使って名前を取得
+                $match_user = MatchUser::findOrFail($match_user_id);
+                
+                // 投稿に紐づくコメント一覧を取得
+                $comments = $post->comments()->get();
+                
+                // ビューにデータを渡す
+                return view('posts.show', [
+                    'post' => $post,
+                    'user' => $user,
+                    'match_user' => $match_user,
+                    'comments' => $comments, // コメント一覧を渡す
+                ]);
+            }
+        } elseif ($post->status === 'limited') {
+            // 限定公開投稿の場合は、投稿者と特定の友達のみ表示
+            if (Auth::id() === $user->id || $post->selected_friend_name === auth()->user()->name) {
+                // 投稿に関連付けられた MatchUser の ID を取得
+                $match_user_id = $post->match_user_id;
+            
+                // MatchUser の ID を使って名前を取得
+                $match_user = MatchUser::findOrFail($match_user_id);
+                
+                // 投稿に紐づくコメント一覧を取得
+                $comments = $post->comments()->get();
+                
+                // ビューにデータを渡す
+                return view('posts.show', [
+                    'post' => $post,
+                    'user' => $user,
+                    'match_user' => $match_user,
+                    'comments' => $comments, // コメント一覧を渡す
+                ]);
+            }
+        }
         
-        // 投稿に紐づくコメント一覧を取得
-        $comments = $post->comments()->get();
-        
-        // ビューにデータを渡す
-        return view('posts.show', [
-            'post' => $post,
-            'user' => $user,
-            'match_user' => $match_user,
-            'comments' => $comments, // コメント一覧を渡す
-        ]);
+        // 前のURLへリダイレクトさせる
+        return back()->with('Delete Failed');
     }
+
 
     public function edit($id)
     {
@@ -159,10 +209,11 @@ class PostsController extends Controller
                 'friends' => $friends,
             ]);
         }
+        
          // 前のURLへリダイレクトさせる
-        return back()
-            ->with('Delete Failed');
+        return back()->with('Delete Failed');
     }
+
 
     public function update(Request $request, $id)
     {
@@ -196,10 +247,11 @@ class PostsController extends Controller
             // 保存後、投稿の詳細ページにリダイレクト
             return redirect()->route('posts.show', $post->id);
         }
+        
          // 前のURLへリダイレクトさせる
-        return back()
-            ->with('Delete Failed');
+        return back()->with('Delete Failed');
     }
+
 
     public function destroy($id)
     {
@@ -211,11 +263,10 @@ class PostsController extends Controller
             // 一覧ページ
             return redirect()->route('posts.index');
         }
+        
          // 前のURLへリダイレクトさせる
-        return back()
-            ->with('Delete Failed');
+        return back()->with('Delete Failed');
     }
-    
     
     
     //自分のすべての投稿
@@ -230,11 +281,12 @@ class PostsController extends Controller
             // $match_userがnullでないことを前提として、直接名前を代入する
             $post->match_user_name = $match_user->name;
         }
-    
+        
         return view('posts.myposts', [
             'posts' => $posts,
         ]);
     }
+    
     
     // 自分の非公開の投稿
     public function private_myposts(Request $request)
@@ -248,7 +300,7 @@ class PostsController extends Controller
             // $match_userがnullでないことを前提として、直接名前を代入する
             $post->match_user_name = $match_user->name;
         }
-    
+        
         return view('posts.private_myposts', [
             'posts' => $posts,
         ]);
