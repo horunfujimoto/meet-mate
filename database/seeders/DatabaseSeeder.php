@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Way;
 use App\Models\User;
+use App\Models\MatchUser;
 
 class DatabaseSeeder extends Seeder
 {
@@ -47,5 +48,25 @@ class DatabaseSeeder extends Seeder
         
         // シーディングされたデータをデータベースに挿入
         User::insert($users);
+        
+        // Way_id と other_way の値を設定
+        foreach ($users as $index => $user) {
+            $wayId = $index + 1; // User_id と同じにする
+            $otherWay = $wayId == 1 ? 'その他' : null;
+
+            // マッチユーザーを作成
+            MatchUser::create([
+                'user_id' => $wayId,
+                'way_id' => $wayId,
+                'name' => $user['name'],
+                'address' => '住んでる場所',
+                'work' => '仕事',
+                'birthday' => null,
+                'sns' => 'SNS',
+                'others' => 'その他情報',
+                'image' => null,
+                'other_way' => $otherWay,
+            ]);
+        }
     }
 }
