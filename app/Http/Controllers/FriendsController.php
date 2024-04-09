@@ -10,7 +10,7 @@ class FriendsController extends Controller
 {
     public function index()
     {
-        if (\Auth::check()) {
+        if (Auth::check()) {
             
             $user = Auth()->user();
         
@@ -29,7 +29,7 @@ class FriendsController extends Controller
     public function store($id)
     {
         // 認証済みユーザ（閲覧者）が、 idのユーザを友達申請する
-        \Auth::user()->friend($id);
+        Auth::user()->friend($id);
         // 前のURLへリダイレクトさせる
         return back();
     }
@@ -37,7 +37,7 @@ class FriendsController extends Controller
     public function destroy($id)
     {
         // 認証済みユーザ（閲覧者）が、 idのユーザを友達解除する
-        \Auth::user()->unfriend($id);
+        Auth::user()->unfriend($id);
         // 前のURLへリダイレクトさせる
         return back();
     }

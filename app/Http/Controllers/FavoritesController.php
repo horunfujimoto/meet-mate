@@ -11,7 +11,7 @@ class FavoritesController extends Controller
     public function store($id)
     {
         // 認証済みユーザ（閲覧者）が、 特定の投稿をいいねする
-        \Auth::user()->favorite($id);
+        Auth::user()->favorite($id);
 
         // 前のURLへリダイレクトさせる
         return back();
@@ -20,7 +20,7 @@ class FavoritesController extends Controller
     public function destroy($id)
     {
         // 認証済みユーザ（閲覧者）が、 特定の投稿をいいね解除する
-        \Auth::user()->unfavorite($id);
+        Auth::user()->unfavorite($id);
 
         // 前のURLへリダイレクトさせる
         return back();
