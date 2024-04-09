@@ -53,7 +53,7 @@
                     @endif
                 </div>
                 
-                <input type="file" name="image" class="input input-bordered w-full" id="myImage" accept="image/*">
+                <input type="file" name="image" class="input input-bordered w-full" id="my_image" accept="image/*">
                 <img id="preview" src="#" alt="プレビュー画像" width="200px" height="auto" hidden>
                 
                 <!-- ここに公開ステータスを選ぶ記述 -->
@@ -112,7 +112,7 @@
             });
     
             // 画像のプレビュー表示
-            $('#myImage').on('change', function (e) {
+            $('#my_image').on('change', function (e) {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();
                     reader.onload = function (e) {

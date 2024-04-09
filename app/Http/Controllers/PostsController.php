@@ -17,11 +17,11 @@ class PostsController extends Controller
             $user = auth()->user(); // ログイン中のユーザーを取得
             
             // 友達のIDを取得
-            $friendIds = $user->myfriends()->pluck('users.id')->toArray();
+            $friend_ids = $user->myfriends()->pluck('users.id')->toArray();
     
             // 友達の投稿のみを取得するクエリを作成
             $query = Post::query()
-                ->whereIn('user_id', $friendIds)
+                ->whereIn('user_id', $friend_ids)
                 ->where(function ($q) {
                     $q->where('status', 'public')
                         ->orWhere(function ($q) {
