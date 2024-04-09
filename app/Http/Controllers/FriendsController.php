@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth; // Authをインポート
 use Illuminate\Http\Request;
 
 class FriendsController extends Controller
@@ -11,7 +12,7 @@ class FriendsController extends Controller
     {
         if (\Auth::check()) {
             
-            $user = auth()->user();
+            $user = Auth()->user();
         
             // 相互の友達を取得
             $myfriends = $user->myfriends()->paginate(10);

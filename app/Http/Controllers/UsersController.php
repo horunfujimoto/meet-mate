@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User; // Userモデルをインポート
+use Illuminate\Support\Facades\Auth; // Authをインポート
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -12,7 +13,7 @@ class UsersController extends Controller
         if (\Auth::check()) {
         
             // ログインユーザーのIDを取得
-            $login_user_id = auth()->id();
+            $login_user_id = Auth()->id();
             
             // ユーザークエリを取得
             $query = User::where('id', '!=', $login_user_id)->orderBy('id', 'desc');

@@ -14,7 +14,7 @@ class PostsController extends Controller
     {
         if (\Auth::check()) {
             
-            $user = auth()->user(); // ログイン中のユーザーを取得
+            $user = Auth()->user(); // ログイン中のユーザーを取得
             
             // 友達のIDを取得
             $friend_ids = $user->myfriends()->pluck('users.id')->toArray();
@@ -26,7 +26,7 @@ class PostsController extends Controller
                     $q->where('status', 'public')
                         ->orWhere(function ($q) {
                             $q->where('status', 'limited')
-                                ->where('selected_friend_ids', 'like', '%' . auth()->user()->name . '%');
+                                ->where('selected_friend_ids', 'like', '%' . Auth()->user()->name . '%');
                         });
                 })
                 ->orderBy('id', 'desc');
@@ -58,10 +58,10 @@ class PostsController extends Controller
 
     public function create()
     {
-        $match_users = MatchUser::where('user_id', auth()->id())->get();
+        $match_users = MatchUser::where('user_id', Auth()->id())->get();
         
         $post = new Post;
-        $friends = auth()->user()->myfriends;
+        $friends = Auth()->user()->myfriends;
     
         // 作成ビューを表示
         return view('posts.create', [
@@ -155,7 +155,7 @@ class PostsController extends Controller
             }
         } elseif ($post->status === '限定公開') {
             // 限定公開投稿の場合は、投稿者と特定の友達のみ表示
-             if (Auth::id() === $user->id || in_array(auth()->user()->name, explode(',', $post->selected_friend_ids))) {
+             if (Auth::id() === $user->id || in_array(Auth()->user()->name, explode(',', $post->selected_friend_ids))) {
                 // 投稿に関連付けられた MatchUser の ID を取得
                 $match_user_id = $post->match_user_id;
             
@@ -192,12 +192,12 @@ class PostsController extends Controller
         $match_user_id = $post->match_user_id;
     
         // MatchUser モデルから会った相手のリストを取得
-        $match_users = MatchUser::where('user_id', auth()->id())->get();
+        $match_users = MatchUser::where('user_id', Auth()->id())->get();
         
         // MatchUser の ID を使って名前を取得
         $match_user = MatchUser::findOrFail($match_user_id);
         
-        $friends = auth()->user()->myfriends;
+        $friends = Auth()->user()->myfriends;
         
         if (\Auth::id() === $post->user_id) {
             // ビューにデータを渡す
@@ -272,7 +272,7 @@ class PostsController extends Controller
     //自分のすべての投稿
     public function myposts(Request $request)
     {
-        $user = auth()->user(); // ログイン中のユーザーを取得
+        $user = Auth()->user(); // ログイン中のユーザーを取得
     
         $posts = Post::query()->where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10);
         
@@ -291,7 +291,7 @@ class PostsController extends Controller
     // 自分の非公開の投稿
     public function private_myposts(Request $request)
     {
-        $user = auth()->user(); // ログイン中のユーザーを取得
+        $user = Auth()->user(); // ログイン中のユーザーを取得
     
         $posts = Post::query()->where('user_id', $user->id)->where('status', 'private')->orderBy('id', 'desc')->paginate(10);
         

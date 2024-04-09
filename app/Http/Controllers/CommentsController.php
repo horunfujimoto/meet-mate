@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\MatchUser;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth; // Authをインポート
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -27,7 +27,7 @@ class CommentsController extends Controller
 
     public function destroy($post_id, $comment_id)
     {
-        $user = auth()->user();
+        $user = Auth()->user();
         
         // コメントを検索して取得
         $comment = Comment::findOrFail($comment_id);

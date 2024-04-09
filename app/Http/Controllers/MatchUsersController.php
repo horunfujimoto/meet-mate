@@ -12,7 +12,7 @@ class MatchUsersController extends Controller
     
     public function index()
     {
-        $user = auth()->user();
+        $user = Auth()->user();
     
         // 自分の投稿のみを取得し、idの降順で10件ずつページネーションして取得
         $match_users = MatchUser::where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10);
@@ -104,7 +104,7 @@ class MatchUsersController extends Controller
         // $match_userに紐づく出会い方の名前を取得する
         $selected_way = $match_user->way_id == 1 ? $match_user->other_way : $match_user->way_id;
         
-        if (\Auth::id() === $match_user->user_id) {
+        if (Auth::id() === $match_user->user_id) {
             return view('match_users.edit', [
                 'match_user' => $match_user,
                 'ways' => $ways,
@@ -121,7 +121,7 @@ class MatchUsersController extends Controller
         // idを検索して取得
         $match_user = MatchUser::findOrFail($id);
         
-        if (\Auth::id() === $match_user->user_id) {
+        if (Auth::id() === $match_user->user_id) {
             // 更新
             $match_user->name = $request->name;
             $match_user->address = $request->address;
@@ -161,7 +161,7 @@ class MatchUsersController extends Controller
         // idを検索して取得
         $match_user = MatchUser::findOrFail($id);
         
-         if (\Auth::id() === $match_user->user_id) {
+         if (Auth::id() === $match_user->user_id) {
             // 削除
             $match_user->delete();
             // 一覧ページ

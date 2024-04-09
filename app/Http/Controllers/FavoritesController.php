@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth; // Authをインポート
 use Illuminate\Http\Request;
 
 class FavoritesController extends Controller
