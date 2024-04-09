@@ -51,7 +51,7 @@
                     <label for="other_way" class="label">
                         <span class="label-text"><span style="color:red;">＊</span>ほかの出会い方を入力してください↓</span>
                     </label>
-                    <input type="text" name="other_way" class="input input-bordered input-small" value="{{ $match_user->way_id > 11 ? $selectedWay : '' }}">
+                    <input type="text" name="other_way" class="input input-bordered input-small" value="{{ $match_user->way_id > 11 ? $selected_way : '' }}">
                 </div>
                 
                 <label for="others" class="label">
@@ -70,7 +70,7 @@
                     @endif
                 </div>
                 
-                <input type="file" name="image" class="input input-bordered w-full mt-3" id="myImage" accept="image/*">
+                <input type="file" name="image" class="input input-bordered w-full mt-3" id="my_image" accept="image/*">
                 <img id="preview" src="#" alt="プレビュー画像" width="200px" height="auto" hidden>
             </div>
 
@@ -99,7 +99,7 @@
                 }
             });
             
-            $('#myImage').on('change', function (e) {
+            $('#my_image').on('change', function (e) {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();
                     reader.onload = function (e) {

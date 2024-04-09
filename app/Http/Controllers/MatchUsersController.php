@@ -48,14 +48,14 @@ class MatchUsersController extends Controller
         $match_user = new MatchUser;
         
         // 入力された出会い方のIDを取得
-        $wayId = $request->way_id;
+        $way_id = $request->way_id;
     
         // 出会い方が「その他」の場合は新しい出会い方を保存
         if ($request->way_id == 1) {
             $way = new Way;
             $way->way = $request->other_way;
             $way->save();
-            $wayId = $way->id;
+            $way_id = $way->id;
         }
             
         // フォームからのデータを保存する
@@ -65,7 +65,7 @@ class MatchUsersController extends Controller
         $match_user->birthday = $request->birthday;
         $match_user->sns = $request->sns;
         $match_user->others = $request->others;
-        $match_user->way_id = $wayId; // 出会い方のIDを保存する
+        $match_user->way_id = $way_id; // 出会い方のIDを保存する
         
         // 画像の保存
         if ($request->hasFile('image')) {
@@ -108,13 +108,13 @@ class MatchUsersController extends Controller
         $ways = Way::where('id', '>=', 1)->where('id', '<=', 11)->get();
         
         // $match_userに紐づく出会い方の名前を取得する
-        $selectedWay = $match_user->way_id > 11 ? Way::findOrFail($match_user->way_id)->way : $match_user->way_id;
+        $selected_way = $match_user->way_id > 11 ? Way::findOrFail($match_user->way_id)->way : $match_user->way_id;
         
         if (\Auth::id() === $match_user->user_id) {
             return view('match_users.edit', [
                 'match_user' => $match_user,
                 'ways' => $ways,
-                'selectedWay' => $selectedWay, // 編集するユーザーの選択された出会い方のIDを渡す
+                'selected_way' => $selected_way, // 編集するユーザーの選択された出会い方のIDを渡す
             ]);
         }
          // 前のURLへリダイレクトさせる
@@ -128,7 +128,7 @@ class MatchUsersController extends Controller
         $match_user = MatchUser::findOrFail($id);
         
         // 入力された出会い方のIDを取得
-        $wayId = $request->way_id;
+        $way_id = $request->way_id;
         
         if (\Auth::id() === $match_user->user_id) {
             // 出会い方が「その他」の場合は新しい出会い方を保存
@@ -136,7 +136,7 @@ class MatchUsersController extends Controller
                 $way = new Way;
                 $way->way = $request->other_way;
                 $way->save();
-                $wayId = $way->id;
+                $way_id = $way->id;
             }
         
             // 更新
@@ -146,7 +146,7 @@ class MatchUsersController extends Controller
             $match_user->birthday = $request->birthday;
             $match_user->sns = $request->sns;
             $match_user->others = $request->others;
-            $match_user->way_id = $wayId; // 出会い方のIDを保存する
+            $match_user->way_id = $way_id; // 出会い方のIDを保存する
             
             // 画像の保存
             if ($request->hasFile('image')) {
