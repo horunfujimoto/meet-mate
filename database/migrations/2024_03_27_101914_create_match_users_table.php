@@ -18,12 +18,13 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('way_id');
             $table->string('name', 20);
-            $table->string('address', 20);
-            $table->string('work', 20);
+            $table->string('address', 10);
+            $table->string('work', 10);
             $table->string('birthday')->nullable();
             $table->string('sns')->nullable();
-            $table->string('others')->nullable();
+            $table->string('others', 50)->nullable();
             $table->string('image')->nullable();
+            $table->string('other_way', 10)->nullable();
             $table->timestamps();
         });
     }

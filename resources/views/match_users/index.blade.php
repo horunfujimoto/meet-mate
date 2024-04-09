@@ -25,7 +25,11 @@
                             <td class="border border-gray-300 px-4 py-2">
                                 @foreach($ways as $way)
                                     @if($way->id === $match_user->way_id)
-                                        {{ $way->way }}
+                                        @if($match_user->way_id == 1)
+                                            {{ $match_user->other_way }}
+                                        @else
+                                            {{ $way->way }}
+                                        @endif
                                     @endif
                                 @endforeach
                             </td>

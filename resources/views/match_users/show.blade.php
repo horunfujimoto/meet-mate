@@ -28,7 +28,11 @@
                     <p>職業: {{ $match_user->work }}</p>
                     <p>誕生日: {{ $match_user->birthday }}</p>
                     <p>SNS: {{ $match_user->sns }}</p>
-                    <p>出会い方: {{ $way->way }}</p>
+                    @if($match_user->way_id == 1)
+                        <p>出会い方: {{ $match_user->other_way }}</p>
+                    @else
+                        <p>出会い方: {{ $way->way }}</p>
+                    @endif
                     <p>その他: {{ $match_user->others }}</p>
                 </div>
             </div>

@@ -51,7 +51,7 @@
                     <label for="other_way" class="label">
                         <span class="label-text"><span style="color:red;">＊</span>ほかの出会い方を入力してください↓</span>
                     </label>
-                    <input type="text" name="other_way" class="input input-bordered input-small" value="{{ $match_user->way_id > 11 ? $selected_way : '' }}">
+                    <input type="text" name="other_way" class="input input-bordered input-small" value="{{ $match_user->way_id == 1 ? $selected_way : '' }}">
                 </div>
                 
                 <label for="others" class="label">

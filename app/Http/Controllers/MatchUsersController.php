@@ -29,8 +29,8 @@ class MatchUsersController extends Controller
     {
         $match_user = new MatchUser;
 
-        // Wayモデルからidが1以上11以下のデータを取得し、$waysに代入(seederの内容のみ)
-        $ways = Way::where('id', '>=', 1)->where('id', '<=', 11)->get();
+        // Wayモデルからseederの内容取得
+        $ways = Way::all();
     
         // 作成ビューを表示
         return view('match_users.create', [
@@ -47,17 +47,6 @@ class MatchUsersController extends Controller
         // 新しいMatchUserインスタンスを作成
         $match_user = new MatchUser;
         
-        // 入力された出会い方のIDを取得
-        $way_id = $request->way_id;
-    
-        // 出会い方が「その他」の場合は新しい出会い方を保存
-        if ($request->way_id == 1) {
-            $way = new Way;
-            $way->way = $request->other_way;
-            $way->save();
-            $way_id = $way->id;
-        }
-            
         // フォームからのデータを保存する
         $match_user->name = $request->name;
         $match_user->address = $request->address;
@@ -65,8 +54,13 @@ class MatchUsersController extends Controller
         $match_user->birthday = $request->birthday;
         $match_user->sns = $request->sns;
         $match_user->others = $request->others;
-        $match_user->way_id = $way_id; // 出会い方のIDを保存する
-        
+        $match_user->way_id = $request->way_id;
+    
+        // 出会い方が「その他」の場合は新しい出会い方を保存
+        if ($request->way_id == 1) {
+            $match_user->other_way = $request->other_way;
+        }
+            
         // 画像の保存
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -104,11 +98,11 @@ class MatchUsersController extends Controller
         // idを検索して取得
         $match_user = MatchUser::findOrFail($id);
         
-        // Wayモデルからidが1以上11以下のデータを取得し、$waysに代入(seederの内容のみ)
-        $ways = Way::where('id', '>=', 1)->where('id', '<=', 11)->get();
+        // Wayモデルからseederの内容取得
+        $ways = Way::all();
         
         // $match_userに紐づく出会い方の名前を取得する
-        $selected_way = $match_user->way_id > 11 ? Way::findOrFail($match_user->way_id)->way : $match_user->way_id;
+        $selected_way = $match_user->way_id == 1 ? $match_user->other_way : $match_user->way_id;
         
         if (\Auth::id() === $match_user->user_id) {
             return view('match_users.edit', [
@@ -117,7 +111,7 @@ class MatchUsersController extends Controller
                 'selected_way' => $selected_way, // 編集するユーザーの選択された出会い方のIDを渡す
             ]);
         }
-         // 前のURLへリダイレクトさせる
+        // 前のURLへリダイレクトさせる
         return back()
             ->with('Delete Failed');
     }
@@ -127,18 +121,7 @@ class MatchUsersController extends Controller
         // idを検索して取得
         $match_user = MatchUser::findOrFail($id);
         
-        // 入力された出会い方のIDを取得
-        $way_id = $request->way_id;
-        
         if (\Auth::id() === $match_user->user_id) {
-            // 出会い方が「その他」の場合は新しい出会い方を保存
-            if ($request->way_id == 1) {
-                $way = new Way;
-                $way->way = $request->other_way;
-                $way->save();
-                $way_id = $way->id;
-            }
-        
             // 更新
             $match_user->name = $request->name;
             $match_user->address = $request->address;
@@ -146,8 +129,13 @@ class MatchUsersController extends Controller
             $match_user->birthday = $request->birthday;
             $match_user->sns = $request->sns;
             $match_user->others = $request->others;
-            $match_user->way_id = $way_id; // 出会い方のIDを保存する
+            $match_user->way_id = $request->way_id;
             
+            // 出会い方が「その他」の場合は新しい出会い方を保存
+            if ($request->way_id == 1) {
+                $match_user->other_way = $request->other_way;
+            }
+                
             // 画像の保存
             if ($request->hasFile('image')) {
                 $image = $request->file('image');

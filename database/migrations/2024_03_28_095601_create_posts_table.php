@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('date_day');
             $table->string('place', 20);
             $table->string('image')->nullable();
-            $table->string('body');
+            $table->string('body',300);
             $table->enum('status', ['public', 'private', 'limited'])->default('public');
             $table->string('selected_friend_ids')->nullable()->after('status');
             $table->timestamps();
