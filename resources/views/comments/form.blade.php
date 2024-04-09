@@ -1,5 +1,11 @@
 <div class="mt-4">
     <h3>コメント</h3>
+    @if(session('success'))
+        <div class="alert" style="background-color: #FFCCCC; color: white;">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div>
         <form method="POST" action="{{ route('comments.store', ['id' => $post->id]) }}">
             @csrf

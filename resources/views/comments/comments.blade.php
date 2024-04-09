@@ -14,7 +14,7 @@
                         {{-- コメント削除ボタン --}}
                         <div>
                             @if (Auth::id() == $comment->user_id)
-                                <form method="POST" action="{{ route('comments.destroy', $comment->id) }}">
+                                <form method="POST" action="{{ route('comments.destroy', ['id' => $post->id, 'comment_id' => $comment->id]) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('削除しますか？')"><i class="fa-solid fa-trash"></i></button>
