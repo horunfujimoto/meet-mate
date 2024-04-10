@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post; // Postモデルをインポート
+use App\Models\User;  // MatchUserモデルをインポート
 use App\Models\MatchUser;  // MatchUserモデルをインポート
 use Illuminate\Support\Facades\Auth; // Authをインポート
 use Illuminate\Http\Request;
@@ -112,6 +113,9 @@ class PostsController extends Controller
         // 投稿者の情報を取得
         $user = $post->user;
         
+        // いいねくれたユーザーを取得
+        $favorite = $post->favorite_users()->get();
+        
         // アクセス制限を追加
         if ($post->status === '公開') {
             // 公開投稿の場合は、投稿者と投稿者の友達のみ表示
@@ -131,6 +135,7 @@ class PostsController extends Controller
                     'user' => $user,
                     'match_user' => $match_user,
                     'comments' => $comments, // コメント一覧を渡す
+                    'favorite' => $favorite,
                 ]);
             }
         } elseif ($post->status === '非公開') {
@@ -151,6 +156,7 @@ class PostsController extends Controller
                     'user' => $user,
                     'match_user' => $match_user,
                     'comments' => $comments, // コメント一覧を渡す
+                    'favorite' => $favorite,
                 ]);
             }
         } elseif ($post->status === '限定公開') {
@@ -171,6 +177,7 @@ class PostsController extends Controller
                     'user' => $user,
                     'match_user' => $match_user,
                     'comments' => $comments, // コメント一覧を渡す
+                    'favorite' => $favorite,
                 ]);
             }
         }

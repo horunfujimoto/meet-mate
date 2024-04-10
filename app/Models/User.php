@@ -181,8 +181,8 @@ class User extends Authenticatable
     public function is_favorite($postId)
     {
         return $this->favorites()->where('post_id', $postId)
-                                  ->where('favorites.user_id', $this->id)
-                                  ->exists();
+                                ->where('favorites.user_id', $this->id)
+                                ->exists();
     }
     
     /**

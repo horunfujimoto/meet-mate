@@ -52,6 +52,14 @@
                                 <button type="submit" class="btn" onclick="return confirm('削除してもよろしいですか？')" style="background-color: #FF6699; color: white; font-size: 1.2rem;"><i class="fa-solid fa-trash"></i></button>
                             </form>
                         </div>
+                        {{-- いいねしてくれたユーザー表示 --}}
+                        @if($favorite->count() > 0)
+                            <div class="d-inline-block mr-2">
+                                @foreach($favorite as $favorite)
+                                    <p>いいねをくれた友達：{{ $favorite->name }}</p>
+                                @endforeach
+                            </div>
+                        @endif
                     @else
                         <div>
                             {{-- いいね --}}
