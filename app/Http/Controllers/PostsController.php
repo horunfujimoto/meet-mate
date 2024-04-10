@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post; // Postモデルをインポート
-use App\Models\User;  // MatchUserモデルをインポート
 use App\Models\MatchUser;  // MatchUserモデルをインポート
 use Illuminate\Support\Facades\Auth; // Authをインポート
 use Illuminate\Http\Request;
