@@ -76,37 +76,37 @@ class User extends Authenticatable
 
     
     /**
-     * $userIdで指定されたユーザに友達申請する。
+     * $user_idで指定されたユーザに友達申請する。
      *
-     * @param  int  $userId
+     * @param  int  $user_id
      * @return bool
      */
-    public function friend($userId)
+    public function friend($user_id)
     {
-        $exist = $this->is_friends($userId);
-        $its_me = $this->id == $userId;
+        $exist = $this->is_friends($user_id);
+        $its_me = $this->id == $user_id;
         
         if ($exist || $its_me) {
             return false;
         } else {
-            $this->friends()->attach($userId);
+            $this->friends()->attach($user_id);
             return true;
         }
     }
     
     /**
-     * $userIdで指定されたユーザを友達解除する。
+     * $user_idで指定されたユーザを友達解除する。
      * 
      * @param  int $usereId
      * @return bool
      */
-    public function unfriend($userId)
+    public function unfriend($user_id)
     {
-        $exist = $this->is_friends($userId);
-        $its_me = $this->id == $userId;
+        $exist = $this->is_friends($user_id);
+        $its_me = $this->id == $user_id;
         
         if ($exist && !$its_me) {
-            $this->friends()->detach($userId);
+            $this->friends()->detach($user_id);
             return true;
         } else {
             return false;
@@ -114,14 +114,14 @@ class User extends Authenticatable
     }
     
     /**
-     * 指定された$userIdのユーザをこのユーザが友達申請中であるか調べる。
+     * 指定された$user_idのユーザをこのユーザが友達申請中であるか調べる。
      * 
-     * @param  int $userId
+     * @param  int $user_id
      * @return bool
      */
-    public function is_friends($userId)
+    public function is_friends($user_id)
     {
-        return $this->friends()->where('friend_id', $userId)->exists();
+        return $this->friends()->where('friend_id', $user_id)->exists();
     }
     
     /**
@@ -146,15 +146,15 @@ class User extends Authenticatable
     /**
      * 指定されたpostをいいねする。
      */
-    public function favorite($postId)
+    public function favorite($post_id)
     {
-        $exist = $this->is_favorite($postId);
+        $exist = $this->is_favorite($post_id);
 
         // すでにいいねに追加されているかチェック
         if ($exist) {
             return false;
         } else {
-            $this->favorites()->attach($postId);
+            $this->favorites()->attach($post_id);
             return true;
         }
     }
@@ -162,13 +162,13 @@ class User extends Authenticatable
     /**
      * 指定されたpostのいいねを解除する。
      */
-    public function unfavorite($postId)
+    public function unfavorite($post_id)
     {
-        $exist = $this->is_favorite($postId);
+        $exist = $this->is_favorite($post_id);
 
         // お気に入りから削除
         if ($exist) {
-            $this->favorites()->detach($postId);
+            $this->favorites()->detach($post_id);
             return true;
         } else {
             return false;
@@ -178,9 +178,9 @@ class User extends Authenticatable
     /**
      * 指定されたpostがいいねに追加されているかチェックする。
      */
-    public function is_favorite($postId)
+    public function is_favorite($post_id)
     {
-        return $this->favorites()->where('post_id', $postId)
+        return $this->favorites()->where('post_id', $post_id)
                                 ->where('favorites.user_id', $this->id)
                                 ->exists();
     }
