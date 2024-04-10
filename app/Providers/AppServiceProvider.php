@@ -24,5 +24,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \URL::forceScheme('https'); //リンクをHTTPSにする設定を行う
+        
+        \DB::listen(function ($query) {
+            \Log::info("({$query->time}) $query->sql");
+            \Log::info($query->bindings);
+        });
     }
 }

@@ -10,13 +10,13 @@ class UsersController extends Controller
 {
     public function index(Request $request)
     {
-        if (\Auth::check()) {
+        if (Auth::check()) {
         
             // ログインユーザーのIDを取得
-            $login_user_id = Auth()->id();
+            $user_id = Auth::id();
             
             // ユーザークエリを取得
-            $query = User::where('id', '!=', $login_user_id)->orderBy('id', 'desc');
+            $query = User::where('id', '!=', $user_id)->orderBy('id', 'desc');
             
             // キーワードが指定されていれば、名前で部分一致検索を行う
             if ($request->has('keyword') && !empty($request->keyword)) {

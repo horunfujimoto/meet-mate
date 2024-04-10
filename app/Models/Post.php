@@ -22,9 +22,9 @@ class Post extends Model
      */
     public function match_users()
     {
-        return $this->belongsTo(MatchUser::class);
+        return $this->belongsTo(MatchUser::class, 'match_user_id');
     }
-    
+        
     /**
      * いいね（ Userモデルとの関係を定義）
      */

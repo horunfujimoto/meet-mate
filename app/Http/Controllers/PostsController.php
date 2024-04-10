@@ -12,8 +12,7 @@ class PostsController extends Controller
     
     public function index(Request $request)
     {
-        if (\Auth::check()) {
-            
+        if (Auth::check()) {
             $user = Auth()->user(); // ログイン中のユーザーを取得
             
             // 友達のIDを取得
@@ -22,6 +21,7 @@ class PostsController extends Controller
             // 友達の投稿のみを取得するクエリを作成
             $query = Post::query()
                 ->whereIn('user_id', $friend_ids)
+                ->with('match_users')
                 ->where(function ($q) {
                     $q->where('status', 'public')
                         ->orWhere(function ($q) {
@@ -38,13 +38,7 @@ class PostsController extends Controller
             }
     
             $posts = $query->paginate(10);
-    
-            foreach ($posts as $post) {
-                $match_user = MatchUser::find($post->match_user_id);
-                // $match_userに直接名前を代入する
-                $post->match_user_name = $match_user->name;
-            }
-    
+
             return view('posts.index', [
                 'posts' => $posts,
                 'keyword' => $request->keyword ?? '', // ビューにキーワードを渡す
@@ -205,7 +199,7 @@ class PostsController extends Controller
         
         $friends = Auth()->user()->myfriends;
         
-        if (\Auth::id() === $post->user_id) {
+        if (Auth::id() === $post->user_id) {
             // ビューにデータを渡す
             return view('posts.edit', [
                 'post' => $post,
@@ -226,7 +220,7 @@ class PostsController extends Controller
         // 更新対象の投稿を取得
         $post = Post::findOrFail($id);
         
-        if (\Auth::id() === $post->user_id) {
+        if (Auth::id() === $post->user_id) {
             // フォームから送信されたデータで投稿を更新
             $post->title = $request->title;
             $post->date_day = $request->date_day;
@@ -263,7 +257,7 @@ class PostsController extends Controller
     {
         // idを検索して取得
         $post = Post::findOrFail($id);
-        if (\Auth::id() === $post->user_id) {
+        if (Auth::id() === $post->user_id) {
             // 削除
             $post->delete();
             // 一覧ページ
@@ -279,14 +273,8 @@ class PostsController extends Controller
     public function myposts(Request $request)
     {
         $user = Auth()->user(); // ログイン中のユーザーを取得
-    
-        $posts = Post::query()->where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10);
         
-        foreach ($posts as $post) {
-            $match_user = MatchUser::find($post->match_user_id);
-            // $match_userがnullでないことを前提として、直接名前を代入する
-            $post->match_user_name = $match_user->name;
-        }
+        $posts = Post::query()->where('user_id', $user->id)->with('match_users')->orderBy('id', 'desc')->paginate(10);
         
         return view('posts.myposts', [
             'posts' => $posts,
@@ -299,13 +287,7 @@ class PostsController extends Controller
     {
         $user = Auth()->user(); // ログイン中のユーザーを取得
     
-        $posts = Post::query()->where('user_id', $user->id)->where('status', 'private')->orderBy('id', 'desc')->paginate(10);
-        
-        foreach ($posts as $post) {
-            $match_user = MatchUser::find($post->match_user_id);
-            // $match_userがnullでないことを前提として、直接名前を代入する
-            $post->match_user_name = $match_user->name;
-        }
+        $posts = Post::query()->where('user_id', $user->id)->where('status', 'private')->with('match_users')->orderBy('id', 'desc')->paginate(10);
         
         return view('posts.private_myposts', [
             'posts' => $posts,

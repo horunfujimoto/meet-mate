@@ -15,7 +15,7 @@
                     <td class="border border-gray-300 px-4 py-2">{{ $post->user->name }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $post->title }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $post->date_day }}</td>
-                    <td class="border border-gray-300 px-4 py-2">{{ $post->match_user_name }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ $post->match_users->name }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $post->status }}</td>
                 </tr>
             @endforeach
