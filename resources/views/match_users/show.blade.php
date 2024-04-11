@@ -53,7 +53,7 @@
                                 @method('DELETE')
                                 
                                 <button type="submit" class="btn" 
-                                    onclick="return confirm('削除してもよろしいですか？')" style="background-color: #FF6699; color: white; font-size: 1.2rem;"><i class="fa-solid fa-trash"></i></button>
+                                    onclick="return confirm('出会った方を削除すると関連した投稿も削除されます。\n本当に削除してもよろしいですか？')" style="background-color: #FF6699; color: white; font-size: 1.2rem;"><i class="fa-solid fa-trash"></i></button>
                             </form>
                         </div>
                     @endif
