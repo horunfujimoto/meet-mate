@@ -84,8 +84,6 @@ class MatchUsersController extends Controller
         $match_user = MatchUser::findOrFail($id);
         
         if (Auth::id() === $match_user->user_id) {
-            // idの値で検索して取得
-            $match_user = MatchUser::findOrFail($id);
             
             // 出会い方（Way）の情報を取得
             $way = Way::findOrFail($match_user->way_id);
