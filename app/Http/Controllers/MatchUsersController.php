@@ -80,17 +80,25 @@ class MatchUsersController extends Controller
 
     public function show($id)
     {
-        // idの値で検索して取得
+        // idを検索して取得
         $match_user = MatchUser::findOrFail($id);
         
-        // 出会い方（Way）の情報を取得
-        $way = Way::findOrFail($match_user->way_id);
-    
-        // 詳細ビューでそれを表示
-        return view('match_users.show', [
-            'match_user' => $match_user,
-            'way' => $way, // 出会い方（Way）の情報をビューに渡す
-        ]);
+        if (Auth::id() === $match_user->user_id) {
+            // idの値で検索して取得
+            $match_user = MatchUser::findOrFail($id);
+            
+            // 出会い方（Way）の情報を取得
+            $way = Way::findOrFail($match_user->way_id);
+        
+            // 詳細ビューでそれを表示
+            return view('match_users.show', [
+                'match_user' => $match_user,
+                'way' => $way, // 出会い方（Way）の情報をビューに渡す
+            ]);
+        }
+        // 前のURLへリダイレクトさせる
+        return back()
+            ->with('Delete Failed');
     }
 
     public function edit($id)
