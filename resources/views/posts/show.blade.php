@@ -25,12 +25,33 @@
             
             <div class="col-md-8">
                 <div class="mt-4">
-                    <p>投稿者: {{ $user->name }}</p>
-                    <p>会った方: {{ $match_user->name }}</p>
-                    <p>タイトル: {{ $post->title }}</p>
-                    <p>会った日: {{ $post->date_day }}</p>
-                    <p>会った場所: {{ $post->place }}</p>
-                    <p>内容: {{ $post->body }}</p>
+                    {{-- 投稿者情報 --}}
+                    <div class="mb-4">
+                        <h5 class="font-weight-bold">投稿者情報</h5>
+                        <p>投稿者: {{ $user->name }}</p>
+                    </div>
+                    
+                    {{-- 会った方の情報 --}}
+                    <div class="mb-4">
+                        <h5 class="font-weight-bold">会った方の情報</h5>
+                        <p>名前: {{ $match_user->name }}</p>
+                        <p>住所: {{ $match_user->address }}</p>
+                        <p>職業: {{ $match_user->work }}</p>
+                        @if($match_user->way_id == 1)
+                            <p>出会い方: {{ $match_user->other_way }}</p>
+                        @else
+                            <p>出会い方: {{ $way->way }}</p>
+                        @endif
+                    </div>
+                    
+                    {{-- 投稿の詳細情報 --}}
+                    <div class="mb-4">
+                        <h5 class="font-weight-bold">投稿の詳細情報</h5>
+                        <p>タイトル: {{ $post->title }}</p>
+                        <p>会った日: {{ $post->date_day }}</p>
+                        <p>会った場所: {{ $post->place }}</p>
+                        <p>内容: {{ $post->body }}</p>
+                    </div>
                 </div>
             </div>
         </div>
