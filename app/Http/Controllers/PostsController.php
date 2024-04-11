@@ -68,6 +68,19 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
+        
+        // バリデーションルールの定義
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:20',
+            'date_day' => 'required|string',
+            'place' => 'required|string|max:20',
+            'body' => 'required|string|max:300',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // 画像のバリデーションルールを追加
+            'match_user_id' => 'required|exists:match_users,id', // 外部キーの存在を確認するバリデーションルールを追加
+            'status' => 'required|in:public,private,limited', // ステータスの値が指定されたものかどうかを確認するバリデーションルールを追加
+            'selected_friend_ids' => 'nullable|array', // 選択された友達のIDが配列であることを確認するバリデーションルールを追加
+        ]);
+        
         // 認証済みユーザーのIDを取得
         $user_id = Auth::id();
         
@@ -217,6 +230,18 @@ class PostsController extends Controller
 
     public function update(Request $request, $id)
     {
+        // バリデーションルールの定義
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:20',
+            'date_day' => 'required|string',
+            'place' => 'required|string|max:20',
+            'body' => 'required|string|max:300',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // 画像のバリデーションルールを追加
+            'match_user_id' => 'required|exists:match_users,id', // 外部キーの存在を確認するバリデーションルールを追加
+            'status' => 'required|in:public,private,limited', // ステータスの値が指定されたものかどうかを確認するバリデーションルールを追加
+            'selected_friend_ids' => 'nullable|array', // 選択された友達のIDが配列であることを確認するバリデーションルールを追加
+        ]);
+        
         // 更新対象の投稿を取得
         $post = Post::findOrFail($id);
         

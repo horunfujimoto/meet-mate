@@ -41,12 +41,25 @@ class MatchUsersController extends Controller
 
     public function store(Request $request)
     {
+        // バリデーションの実行
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:20',
+            'address' => 'required|string|max:10',
+            'work' => 'required|string|max:10',
+            'birthday' => 'nullable|date',
+            'sns' => 'nullable|string',
+            'others' => 'nullable|string|max:50',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'way_id' => 'required|string',
+            'other_way' => 'nullable|string|max:10',
+        ]);
+    
         // 認証済みユーザーのIDを取得
         $user_id = Auth::id();
-        
+    
         // 新しいMatchUserインスタンスを作成
         $match_user = new MatchUser;
-        
+    
         // フォームからのデータを保存する
         $match_user->name = $request->name;
         $match_user->address = $request->address;
@@ -60,7 +73,7 @@ class MatchUsersController extends Controller
         if ($request->way_id == 1) {
             $match_user->other_way = $request->other_way;
         }
-            
+    
         // 画像の保存
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -68,14 +81,16 @@ class MatchUsersController extends Controller
             $image->move(public_path('images'), $filename);
             $match_user->image = $filename;
         }
-        
+    
         $match_user->user_id = $user_id;
-        
+    
+        // データの保存
         $match_user->save();
-        
+    
         // 詳細ページにリダイレクト
         return redirect()->route('match_users.show', $match_user->id);
     }
+
 
 
     public function show($id)
@@ -124,6 +139,20 @@ class MatchUsersController extends Controller
 
     public function update(Request $request, $id)
     {
+        
+        // バリデーションの実行
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:20',
+            'address' => 'required|string|max:10',
+            'work' => 'required|string|max:10',
+            'birthday' => 'nullable|date',
+            'sns' => 'nullable|string',
+            'others' => 'nullable|string|max:50',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'way_id' => 'required|string',
+            'other_way' => 'nullable|string|max:10',
+        ]);
+        
         // idを検索して取得
         $match_user = MatchUser::findOrFail($id);
         
