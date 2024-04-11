@@ -10,7 +10,7 @@
             @include('users.nabtabs')
         </div>
         <div class="pt-4">
-            <form action="{{ route('users.index') }}" method="GET" class="ml-auto d-flex align-items-center">
+            <form action="{{ route('users.index') }}" method="GET" class="ml-auto d-flex align-items-center m-4">
                 <div class="col-auto">
                     <input type="text" name="keyword" value="{{ $keyword }}" placeholder="ユーザー名を入力" class="form-control mr-2" style="width: 15em;">
                 </div>
