@@ -91,7 +91,7 @@ return [
         'array' => 'The :attribute must not have more than :max items.',
         'file' => 'The :attribute must not be greater than :max kilobytes.',
         'numeric' => 'The :attribute must not be greater than :max.',
-        'string' => 'The :attribute must not be greater than :max characters.',
+        'string' => ':attributeは:max文字以内で指定してください。',
     ],
     'max_digits' => 'The :attribute must not have more than :max digits.',
     'mimes' => 'The :attribute must be a file of type: :values.',
@@ -125,7 +125,7 @@ return [
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => ':attributeは必須です',
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_if_accepted' => 'The :attribute field is required when :other is accepted.',
@@ -142,7 +142,7 @@ return [
         'string' => 'The :attribute must be :size characters.',
     ],
     'starts_with' => 'The :attribute must start with one of the following: :values.',
-    'string' => 'The :attribute must be a string.',
+    'string' => ':attributeには文字列を指定してください。',
     'timezone' => 'The :attribute must be a valid timezone.',
     'unique' => 'The :attribute has already been taken.',
     'uploaded' => 'The :attribute failed to upload.',
@@ -179,6 +179,24 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'title' => 'タイトル',
+        'date_day' => '会った日',
+        'place' => '会った場所',
+        'body' => '内容',
+        'image' => '画像',
+        'match_user_id' => 'マッチユーザーID',
+        'status' => '公開設定',
+        'selected_friend_ids' => '選択された友達のID',
+        'name' => '出会った方の名前',
+        'address' => '住んでる場所',
+        'work' => '仕事',
+        'birthday' => '誕生日',
+        'sns' => 'SNS',
+        'others' => 'その他',
+        'way_id' => '出会い方',
+        'other_way' => 'その他の出会い方',
+    ],
+
 
 ];
