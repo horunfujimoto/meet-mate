@@ -14,18 +14,18 @@
     
                 <div class="form-control my-4">
                     <label for="name" class="label">
-                        <span class="label-text"><span style="color:red;">＊</span>名前:</span>
+                        <span class="label-text"><span style="color:red;">＊</span>名前(20文字):</span>
     
                     </label>
                     <input type="text" name="name" class="input input-bordered w-full" required>
                     
                     <label for="address" class="label">
-                        <span class="label-text"><span style="color:red;">＊</span>住んでる場所:</span>
+                        <span class="label-text"><span style="color:red;">＊</span>住んでる場所(10文字):</span>
                     </label>
                     <input type="text" name="address" class="input input-bordered w-full" required>
                     
                     <label for="work" class="label">
-                        <span class="label-text"><span style="color:red;">＊</span>職業:</span>
+                        <span class="label-text"><span style="color:red;">＊</span>職業(10文字):</span>
                     </label>
                     <input type="text" name="work" class="input input-bordered w-full" required>
                     
@@ -51,13 +51,13 @@
                     <!-- その他の出会い方の追加入力フィールド -->
                     <div id="other_way_input" style="display: none;">
                         <label for="other_way" class="label">
-                            <span class="label-text"><span style="color:red;">＊</span>ほかの出会い方を入力してください↓</span>
+                            <span class="label-text"><span style="color:red;">＊</span>▼ほかの出会い方を入力してください(10文字)▼</span>
                         </label>
                         <input type="text" name="other_way" class="input input-bordered w-full input-small">
                     </div>
                                     
                     <label for="others" class="label">
-                        <span class="label-text">その他情報(任意):</span>
+                        <span class="label-text">その他情報(任意、50文字):</span>
                     </label>
                     <input type="text" name="others" class="input input-bordered w-full">
                     
@@ -82,18 +82,18 @@
 
             <div class="form-control my-4">
                 <label for="name" class="label">
-                    <span class="label-text"><span style="color:red;">＊</span>名前:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>名前(20文字):</span>
 
                 </label>
                 <input type="text" name="name" class="input input-bordered w-full" required>
                 
                 <label for="address" class="label">
-                    <span class="label-text"><span style="color:red;">＊</span>住んでる場所:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>住んでる場所(10文字):</span>
                 </label>
                 <input type="text" name="address" class="input input-bordered w-full" required>
                 
                 <label for="work" class="label">
-                    <span class="label-text"><span style="color:red;">＊</span>職業:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>職業(10文字):</span>
                 </label>
                 <input type="text" name="work" class="input input-bordered w-full" required>
                 
@@ -119,13 +119,13 @@
                 <!-- その他の出会い方の追加入力フィールド -->
                 <div id="other_way_input" style="display: none;">
                     <label for="other_way" class="label">
-                        <span class="label-text"><span style="color:red;">＊</span>ほかの出会い方を入力してください↓</span>
+                        <span class="label-text"><span style="color:red;">＊</span>▼ほかの出会い方を入力してください(10文字)▼</span>
                     </label>
                     <input type="text" name="other_way" class="input input-bordered w-full input-small">
                 </div>
                                 
                 <label for="others" class="label">
-                    <span class="label-text">その他情報(任意):</span>
+                    <span class="label-text">その他情報(任意、50文字):</span>
                 </label>
                 <input type="text" name="others" class="input input-bordered w-full">
                 

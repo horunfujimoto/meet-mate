@@ -24,7 +24,7 @@
                     </select>
                     
                     <label for="title" class="label">
-                        <span class="label-text"><span style="color:red;">＊</span>タイトル:</span>
+                        <span class="label-text"><span style="color:red;">＊</span>タイトル(20文字):</span>
                     </label>
                     <input type="text" name="title" class="input input-bordered w-full" required>
                     
@@ -34,12 +34,12 @@
                     <input type="date" name="date_day" class="input input-bordered w-full" required>
                     
                     <label for="place" class="label">
-                        <span class="label-text"><span style="color:red;">＊</span>会った場所:</span>
+                        <span class="label-text"><span style="color:red;">＊</span>会った場所(20文字):</span>
                     </label>
                     <input type="text" name="place" class="input input-bordered w-full" required>
                     
                     <label for="body" class="label">
-                        <span class="label-text"><span style="color:red;">＊</span>内容:</span>
+                        <span class="label-text"><span style="color:red;">＊</span>内容(300文字):</span>
                     </label>
                     <input type="text" name="body" class="input input-bordered w-full" required>
                     
@@ -53,7 +53,7 @@
                     
                     <!-- ここに公開ステータスを選ぶ記述 -->
                     <label for="status" class="label">
-                        <span class="label-text"><span style="color:red;">＊</span>公開ステータス:</span>
+                        <span class="label-text"><span style="color:red;">＊</span>公開設定:</span>
                     </label>
                     <select id="status" name="status" class="form-control">
                         <option value="public">公開</option>
@@ -96,7 +96,7 @@
                 </select>
                 
                 <label for="title" class="label">
-                    <span class="label-text"><span style="color:red;">＊</span>タイトル:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>タイトル(20文字):</span>
                 </label>
                 <input type="text" name="title" class="input input-bordered w-full" required>
                 
@@ -106,12 +106,12 @@
                 <input type="date" name="date_day" class="input input-bordered w-full" required>
                 
                 <label for="place" class="label">
-                    <span class="label-text"><span style="color:red;">＊</span>会った場所:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>会った場所(20文字):</span>
                 </label>
                 <input type="text" name="place" class="input input-bordered w-full" required>
                 
                 <label for="body" class="label">
-                    <span class="label-text"><span style="color:red;">＊</span>内容:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>内容(300文字):</span>
                 </label>
                 <input type="text" name="body" class="input input-bordered w-full" required>
                 
@@ -125,7 +125,7 @@
                 
                 <!-- ここに公開ステータスを選ぶ記述 -->
                 <label for="status" class="label">
-                    <span class="label-text"><span style="color:red;">＊</span>公開ステータス:</span>
+                    <span class="label-text"><span style="color:red;">＊</span>公開設定:</span>
                 </label>
                 <select id="status" name="status" class="form-control">
                     <option value="public">公開</option>
