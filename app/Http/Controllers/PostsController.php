@@ -132,6 +132,8 @@ class PostsController extends Controller
                 // MatchUser の ID を使って名前を取得
                 $match_user = MatchUser::findOrFail($match_user_id);
                 
+                $way = $match_user->way_id()->get();
+                
                 // 投稿に紐づくコメント一覧を取得
                 $comments = $post->comments()->get();
                 
