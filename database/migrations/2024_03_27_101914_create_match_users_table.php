@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('way_id');
             $table->string('name', 20);
+            $table->integer('age');
+            $table->integer('feeling');
             $table->string('address', 10);
             $table->string('work', 10);
             $table->string('birthday')->nullable();

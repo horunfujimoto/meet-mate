@@ -34,7 +34,9 @@
                     {{-- 会った方の情報 --}}
                     <div class="mb-4">
                         <h5 class="font-weight-bold">会った方の情報</h5>
-                        <p>名前: {{ $match_user->name }}</p>
+                        <p>名前: {{ $match_user->name }}歳</p>
+                        <p>年齢: {{ $match_user->age }}％</p>
+                        <p>好感度: {{ $match_user->feeling }}</p>
                         <p>住所: {{ $match_user->address }}</p>
                         <p>職業: {{ $match_user->work }}</p>
                         @if($match_user->way_id == 1)

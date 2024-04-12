@@ -15,9 +15,18 @@
                 <div class="form-control my-4">
                     <label for="name" class="label">
                         <span class="label-text"><span style="color:red;">＊</span>名前(20文字):</span>
-    
                     </label>
                     <input type="text" name="name" class="input input-bordered w-full" required>
+                    
+                    <label for="age" class="label">
+                        <span class="label-text"><span style="color:red;">＊</span>年齢:</span>
+                    </label>
+                    <input type="number" name="age" class="input input-bordered w-full" required min="0">
+                    
+                    <label for="feeling" class="label">
+                        <span class="label-text"><span style="color:red;">＊</span>好感度:</span>
+                    </label>
+                    <input type="number" name="feeling" class="input input-bordered w-full" required max="100">
                     
                     <label for="address" class="label">
                         <span class="label-text"><span style="color:red;">＊</span>住んでる場所(10文字):</span>
@@ -83,9 +92,18 @@
             <div class="form-control my-4">
                 <label for="name" class="label">
                     <span class="label-text"><span style="color:red;">＊</span>名前(20文字):</span>
-
                 </label>
                 <input type="text" name="name" class="input input-bordered w-full" required>
+                
+                <label for="age" class="label">
+                    <span class="label-text"><span style="color:red;">＊</span>年齢:</span>
+                </label>
+                <input type="number" name="age" class="input input-bordered w-full" required min="0">
+                
+                <label for="feeling" class="label">
+                    <span class="label-text"><span style="color:red;">＊</span>好感度:</span>
+                </label>
+                <input type="number" name="feeling" class="input input-bordered w-full" required max="100">
                 
                 <label for="address" class="label">
                     <span class="label-text"><span style="color:red;">＊</span>住んでる場所(10文字):</span>

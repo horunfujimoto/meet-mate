@@ -44,6 +44,8 @@ class MatchUsersController extends Controller
         // バリデーションの実行
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
+            'age' => 'required|integer',
+            'feeling' => 'required|integer',
             'address' => 'required|string|max:10',
             'work' => 'required|string|max:10',
             'birthday' => 'nullable|date',
@@ -62,6 +64,8 @@ class MatchUsersController extends Controller
     
         // フォームからのデータを保存する
         $match_user->name = $request->name;
+        $match_user->age = $request->age;
+        $match_user->feeling = $request->feeling;
         $match_user->address = $request->address;
         $match_user->work = $request->work;
         $match_user->birthday = $request->birthday;
@@ -143,6 +147,8 @@ class MatchUsersController extends Controller
         // バリデーションの実行
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
+            'age' => 'required|integer',
+            'feeling' => 'required|integer',
             'address' => 'required|string|max:10',
             'work' => 'required|string|max:10',
             'birthday' => 'nullable|date',
@@ -159,6 +165,8 @@ class MatchUsersController extends Controller
         if (Auth::id() === $match_user->user_id) {
             // 更新
             $match_user->name = $request->name;
+            $match_user->age = $request->age;
+            $match_user->feeling = $request->feeling;
             $match_user->address = $request->address;
             $match_user->work = $request->work;
             $match_user->birthday = $request->birthday;

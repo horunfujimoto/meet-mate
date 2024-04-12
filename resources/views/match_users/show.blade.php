@@ -24,6 +24,8 @@
             <div class="col-md-8">
                 <div class="mt-4">
                     <p>名前: {{ $match_user->name }}</p>
+                    <p>年齢: {{ $match_user->age }}歳</p>
+                    <p>好感度: {{ $match_user->feeling }}%</p>
                     <p>住んでいる場所: {{ $match_user->address }}</p>
                     <p>職業: {{ $match_user->work }}</p>
                     <p>誕生日: {{ $match_user->birthday }}</p>

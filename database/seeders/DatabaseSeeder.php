@@ -59,6 +59,8 @@ class DatabaseSeeder extends Seeder
                 'user_id' => $wayId,
                 'way_id' => $wayId,
                 'name' => $user['name'],
+                'age' => 30,
+                'feeling' => 80,
                 'address' => '住んでる場所',
                 'work' => '仕事',
                 'birthday' => null,

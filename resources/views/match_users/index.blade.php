@@ -14,6 +14,7 @@
                     <thead style="background-color: #FFCCCC;">
                         <tr>
                             <th class="border border-gray-300 px-4 py-2">出会った方</th>
+                            <th class="border border-gray-300 px-4 py-2">年齢</th>
                             <th class="border border-gray-300 px-4 py-2">住んでる場所</th>
                             <th class="border border-gray-300 px-4 py-2">出会い方</th>
                             <th class="border border-gray-300 px-4 py-2">画像</th>
@@ -23,6 +24,7 @@
                         @foreach($match_users as $match_user)
                         <tr onclick="window.location='{{ route('match_users.show', $match_user->id) }}';" style="cursor:pointer;">
                             <td class="border border-gray-300 px-4 py-2">{{ $match_user->name }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $match_user->age }}</td>
                             <td class="border border-gray-300 px-4 py-2">{{ $match_user->address }}</td>
                             <td class="border border-gray-300 px-4 py-2">
                                 @foreach($ways as $way)
@@ -58,6 +60,7 @@
                         出会った方: {{ $match_user->name }}
                     </div>
                     <div class="card-body">
+                        <p class="card-text">年齢: {{ $match_user->age }}</p>
                         <p class="card-text">住んでる場所: {{ $match_user->address }}</p>
                         <p class="card-text">出会い方: 
                             @foreach($ways as $way)
