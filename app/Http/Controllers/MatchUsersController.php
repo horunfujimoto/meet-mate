@@ -10,16 +10,40 @@ use Illuminate\Http\Request;
 class MatchUsersController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth()->user();
+        
+        // セレクトボックスで選択した値
+        $select = $request->feeling;
+
+        // セレクトボックスの値に応じてソート
+        switch ($select) {
+            case '1':
+                //「指定なし」はID順
+                $match_users = MatchUser::where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10);
+                break;
+            case '2':
+                // 「好感度が低い順」でソート
+                $match_users = MatchUser::where('user_id', $user->id)->orderBy('feeling', 'asc')->paginate(10);
+                break;
+            case '3':
+                // 「好感度が高い順」でソート
+                $match_users = MatchUser::where('user_id', $user->id)->orderBy('feeling', 'desc')->paginate(10);
+                break;
+            default :
+                // デフォルトはID順
+                $match_users = MatchUser::where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10);
+                break;
+        }
     
-        // 自分の投稿のみを取得し、idの降順で10件ずつページネーションして取得
-        $match_users = MatchUser::where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10);
+        // // 自分の投稿のみを取得し、idの降順で10件ずつページネーションして取得
+        // $match_users = MatchUser::where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10);
         $ways = Way::all();
     
         // ユーザ一覧ビューでそれを表示
         return view('match_users.index', [
+            'select' => $select,
             'match_users' => $match_users,
             'ways' => $ways, // $waysをビューに渡す
         ]);
